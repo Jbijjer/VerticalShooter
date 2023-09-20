@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://p5qxspebac7p"]
+
+[ext_resource type="PackedScene" uid="uid://cgxyj8f7wq5dx" path="res://scenes/background/background.tscn" id="1_k0uod"]
+[ext_resource type="PackedScene" uid="uid://ccjevfme2ltui" path="res://scenes/player/player.tscn" id="2_6hwfm"]
+[ext_resource type="PackedScene" uid="uid://cfnqk7ni0c67l" path="res://scenes/enemy/enemy.tscn" id="3_6xdp7"]
+[ext_resource type="PackedScene" uid="uid://cx1vuaiuv2mm2" path="res://scenes/laser/laser.tscn" id="4_ghp38"]
+
+[node name="main" type="Node"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(241, 318)
+
+[node name="background" parent="." instance=ExtResource("1_k0uod")]
+position = Vector2(-5, -18)
+
+[node name="player" parent="." instance=ExtResource("2_6hwfm")]
+position = Vector2(249, 589)
+
+[node name="enemy" parent="." instance=ExtResource("3_6xdp7")]
+position = Vector2(237, 28)
+scale = Vector2(0.5, 0.5)
+
+[node name="laser" parent="." instance=ExtResource("4_ghp38")]
+position = Vector2(235, 550)
+scale = Vector2(0.5, 0.5)
