@@ -14,10 +14,14 @@ config/name="VerticalShooter"
 run/main_scene="res://scenes/main/main.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 
+[autoload]
+
+SignalManager="*res://manager/SignalManager.gd"
+
 [display]
 
-window/size/viewport_width=480
-window/size/viewport_height=640
+window/size/viewport_width=720
+window/size/viewport_height=1028
 window/stretch/mode="canvas_items"
 
 [input]

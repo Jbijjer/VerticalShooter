@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ba83cf4j2sxom"]
+
+[ext_resource type="Script" path="res://component/hit_component.gd" id="1_nopcb"]
+
+[node name="hit_component" type="Node"]
+script = ExtResource("1_nopcb")

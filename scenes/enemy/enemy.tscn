@@ -7,7 +7,7 @@
 radius = 42.107
 
 [node name="enemy" type="CharacterBody2D" groups=["enemy"]]
-collision_layer = 0
+collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_p6ina")
 
@@ -16,3 +16,9 @@ texture = ExtResource("1_y48a2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ldo44")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
