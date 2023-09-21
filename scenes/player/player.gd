@@ -1,9 +1,15 @@
 extends CharacterBody2D
 
-const SPEED: float = 200.0
+const MIN_SPEED: float = 150.0
+const MAX_SPEED: float = 450.0
+const ACCELERATION_RATE: float = 10
+
 @export var HP = 5
 
-var laser = preload("res://scenes/laser/laser.tscn") 
+var cur_speed: float = MIN_SPEED
+
+
+@export var laser = preload("res://scenes/laser/bluelaser.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,7 +25,7 @@ func _process(delta):
 func shoot():
 	var l = laser.instantiate() as Area2D
 	get_tree().root.add_child(l)
-	l.shoot(Vector2(global_position.x, global_position.y - 100) , true)
+	l.shoot(Vector2(global_position.x, global_position.y - 40) , true)
 	
 	
 func _physics_process(delta):
@@ -28,13 +34,26 @@ func _physics_process(delta):
 	
 	
 func get_input():
+	check_cur_speed()
 	if Input.is_action_pressed("Right"):
-		velocity = Vector2(SPEED, 0)
+		velocity = Vector2(cur_speed, 0)
 	elif Input.is_action_pressed("Left"):
-		velocity = Vector2(-SPEED, 0) 
+		velocity = Vector2(-cur_speed, 0) 
 	else:
 		velocity = Vector2.ZERO
+		reset_cur_speed()
 	is_out_of_bound()
+	
+	
+func check_cur_speed():
+	if (cur_speed + ACCELERATION_RATE <= MAX_SPEED):
+		cur_speed += ACCELERATION_RATE
+	else:
+		cur_speed = MAX_SPEED
+		
+		
+func reset_cur_speed():
+	cur_speed = MIN_SPEED
 		
 		
 func is_out_of_bound():
@@ -51,8 +70,19 @@ func hit(power: float):
 		
 		
 func die():
+	SignalManager.player_died.emit()
 	queue_free()
 
 
 func on_enemy_died(points: int):
-	print(str("POINTS : ", points))
+	GameManager.update_xp(points)
+
+
+func _on_area_2d_area_entered(area):
+	if area.is_in_group("weapon"):
+		hit(area.POWER)
+
+
+func _on_area_2d_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	if area.is_in_group("enemy"):
+		hit(1)
