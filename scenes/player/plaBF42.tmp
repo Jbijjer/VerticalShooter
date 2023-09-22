@@ -1,0 +1,98 @@
+[gd_scene load_steps=16 format=3 uid="uid://ccjevfme2ltui"]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_2atnk"]
+[ext_resource type="Texture2D" uid="uid://cj2d15oh78loh" path="res://assets/PNG/Damage/Explosion/explosion00.png" id="2_x2iym"]
+[ext_resource type="Texture2D" uid="uid://bk4qcriy2wdy6" path="res://assets/PNG/Damage/Explosion/explosion04.png" id="3_8g7r4"]
+[ext_resource type="Texture2D" uid="uid://b6588xsaqkbcy" path="res://assets/PNG/Damage/Explosion/explosion08.png" id="4_8sfl1"]
+[ext_resource type="Texture2D" uid="uid://cmce7eqlcsa6s" path="res://assets/PNG/Damage/Explosion/explosion01.png" id="5_oqibt"]
+[ext_resource type="Texture2D" uid="uid://biwrnrdrx5ajf" path="res://assets/PNG/Damage/Explosion/explosion05.png" id="6_r7lap"]
+[ext_resource type="Texture2D" uid="uid://peublarh13vt" path="res://assets/PNG/Damage/Explosion/explosion03.png" id="7_ec1pk"]
+[ext_resource type="Texture2D" uid="uid://cxsmkkg4ue6gf" path="res://assets/PNG/Damage/Explosion/explosion06.png" id="8_avhcl"]
+[ext_resource type="Texture2D" uid="uid://bj64uajnw1t5r" path="res://assets/PNG/Damage/Explosion/explosion07.png" id="9_psfgp"]
+[ext_resource type="Texture2D" uid="uid://ioky7ywypevk" path="res://assets/PNG/Damage/Explosion/explosion02.png" id="10_x5twy"]
+[ext_resource type="Texture2D" uid="uid://dlb0mfjx60aww" path="res://assets/PNG/playerShip1_blue.png" id="11_nomgw"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4nftl"]
+radius = 25.9517
+height = 99.9932
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bcaif"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_x2iym")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_8g7r4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8sfl1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_oqibt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_r7lap")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ec1pk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_avhcl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_psfgp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_x5twy")
+}],
+"loop": false,
+"name": &"death",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_nomgw")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_ynrvc"]
+resource_name = "idle"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lxcas"]
+_data = {
+"idle": SubResource("Animation_ynrvc")
+}
+
+[node name="player" type="CharacterBody2D" groups=["player"]]
+scale = Vector2(0.5, 0.5)
+collision_mask = 18
+motion_mode = 1
+script = ExtResource("1_2atnk")
+HP = 3
+
+[node name="Area2D" type="Area2D" parent="." groups=["player"]]
+collision_layer = 19
+collision_mask = 19
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 10)
+rotation = 1.58244
+shape = SubResource("CapsuleShape2D_4nftl")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_bcaif")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_lxcas")
+}
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_shape_entered" from="Area2D" to="." method="_on_area_2d_area_shape_entered"]

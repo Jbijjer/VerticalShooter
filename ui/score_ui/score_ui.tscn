@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://chicrpt21jw35"]
+
+[ext_resource type="FontFile" uid="uid://cnacftrakk1vh" path="res://assets/font/kenvector_future_thin.ttf" id="1_01cap"]
+[ext_resource type="Script" path="res://ui/score_ui/score_ui.gd" id="1_ne66x"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_s5ii7"]
+font = ExtResource("1_01cap")
+
+[node name="score_ui" type="Label"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "SCORE :"
+label_settings = SubResource("LabelSettings_s5ii7")
+script = ExtResource("1_ne66x")

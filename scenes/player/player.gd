@@ -1,13 +1,12 @@
 extends CharacterBody2D
 
-const MIN_SPEED: float = 150.0
-const MAX_SPEED: float = 450.0
+const MIN_SPEED: float = 100.0
+const MAX_SPEED: float = 350.0
 const ACCELERATION_RATE: float = 10
 
-@export var HP = 5
 
+@onready var sprite_2d = $Sprite2D
 var cur_speed: float = MIN_SPEED
-
 
 @export var laser = preload("res://scenes/laser/bluelaser.tscn")
 
@@ -15,11 +14,14 @@ var cur_speed: float = MIN_SPEED
 func _ready():
 	SignalManager.enemy_died.connect(on_enemy_died)
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("Shoot"):
 		shoot()
+		
+	if sprite_2d.get_animation() == "death":
+		if not sprite_2d.is_playing():
+			die()
 	
 	
 func shoot():
@@ -29,6 +31,8 @@ func shoot():
 	
 	
 func _physics_process(delta):
+	if GameManager.HP <= 0:
+		return
 	get_input()
 	move_and_slide()
 	
@@ -63,23 +67,24 @@ func is_out_of_bound():
 		global_position.x = 720
 	
 func hit(power: float):
-	print(str("HP : ", HP))
-	HP -= power
-	if HP <= 0:
-		die()
+	GameManager.HP -= power
+	SignalManager.combo_reset.emit()
+	SignalManager.player_hit.emit()
+	if GameManager.HP <= 0:
+		sprite_2d.play("death")
 		
 		
 func die():
 	SignalManager.player_died.emit()
 	queue_free()
 
-
 func on_enemy_died(points: int):
-	GameManager.update_xp(points)
+	pass
 
 
 func _on_area_2d_area_entered(area):
 	if area.is_in_group("weapon"):
+		area.queue_free()
 		hit(area.POWER)
 
 

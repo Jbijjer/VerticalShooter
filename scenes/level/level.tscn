@@ -1,0 +1,91 @@
+[gd_scene load_steps=9 format=3 uid="uid://p5qxspebac7p"]
+
+[ext_resource type="Script" path="res://scenes/level/level.gd" id="1_dqotv"]
+[ext_resource type="PackedScene" uid="uid://cu1bmcpku7y8" path="res://ui/level_up_ui/level_up_ui.tscn" id="2_shtdd"]
+[ext_resource type="PackedScene" uid="uid://chicrpt21jw35" path="res://ui/score_ui/score_ui.tscn" id="3_63h40"]
+[ext_resource type="PackedScene" uid="uid://b3n1p4voju61h" path="res://ui/pause_ui/pause_ui.tscn" id="3_k2cp0"]
+[ext_resource type="PackedScene" uid="uid://c8ycjh7cfaoi" path="res://ui/combo_ui/combo_ui.tscn" id="3_yjcv8"]
+[ext_resource type="PackedScene" uid="uid://cgxyj8f7wq5dx" path="res://scenes/background/background.tscn" id="4_c0ur0"]
+[ext_resource type="PackedScene" uid="uid://ccjevfme2ltui" path="res://scenes/player/player.tscn" id="5_d0grk"]
+[ext_resource type="PackedScene" uid="uid://ckel7t6716o01" path="res://ui/life_ui/life_ui.tscn" id="7_ojott"]
+
+[node name="level" type="Node"]
+script = ExtResource("1_dqotv")
+
+[node name="level_up_ui" parent="." instance=ExtResource("2_shtdd")]
+visible = false
+
+[node name="pause_ui" parent="." instance=ExtResource("3_k2cp0")]
+
+[node name="background" parent="." instance=ExtResource("4_c0ur0")]
+position = Vector2(-5, -13)
+
+[node name="player" parent="." instance=ExtResource("5_d0grk")]
+position = Vector2(350, 867)
+
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 1.509
+autostart = true
+
+[node name="MCLabels" type="MarginContainer" parent="."]
+offset_right = 567.0
+offset_bottom = 65.0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MCLabels"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 7
+
+[node name="score_ui" parent="MCLabels/VBoxContainer" instance=ExtResource("3_63h40")]
+layout_mode = 2
+
+[node name="combo_ui" parent="MCLabels/VBoxContainer" instance=ExtResource("3_yjcv8")]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MCLabels"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+alignment = 2
+
+[node name="life_ui" parent="MCLabels/VBoxContainer2" instance=ExtResource("7_ojott")]
+layout_mode = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(360, 491)
+
+[node name="HBEnemySpawner" type="HBoxContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -41.0
+grow_horizontal = 2
+
+[node name="EnemySpawner1" type="Marker2D" parent="HBEnemySpawner"]
+position = Vector2(80, 0)
+
+[node name="EnemySpawner2" type="Marker2D" parent="HBEnemySpawner"]
+position = Vector2(160, 0)
+
+[node name="EnemySpawner3" type="Marker2D" parent="HBEnemySpawner"]
+position = Vector2(240, 0)
+
+[node name="EnemySpawner4" type="Marker2D" parent="HBEnemySpawner"]
+position = Vector2(320, 0)
+
+[node name="EnemySpawner5" type="Marker2D" parent="HBEnemySpawner"]
+position = Vector2(400, 0)
+
+[node name="EnemySpawner6" type="Marker2D" parent="HBEnemySpawner"]
+position = Vector2(480, 0)
+
+[node name="EnemySpawner7" type="Marker2D" parent="HBEnemySpawner"]
+position = Vector2(560, 0)
+
+[node name="EnemySpawner8" type="Marker2D" parent="HBEnemySpawner"]
+position = Vector2(640, 0)
+
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
