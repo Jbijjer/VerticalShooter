@@ -1,7 +1,7 @@
 extends Node
 
 var cur_combo_multiplier = 1.0
-var max_combo = 10.0
+var max_combo = 3.0
 var combo_growth = 0.1
 var cur_combo_count = 0
 

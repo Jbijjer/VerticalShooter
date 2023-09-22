@@ -1,18 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://cx1vuaiuv2mm2"]
+[gd_scene load_steps=5 format=3 uid="uid://cx1vuaiuv2mm2"]
 
-[ext_resource type="Script" path="res://scenes/laser/laser.gd" id="1_lnn8d"]
+[ext_resource type="Script" path="res://scenes/laser/bluelaser.gd" id="1_2elys"]
 [ext_resource type="Texture2D" uid="uid://dskjjxcrfjhm8" path="res://assets/PNG/Lasers/laserBlue01.png" id="2_h6my0"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eljv5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_h6my0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wcdff"]
 size = Vector2(8, 44)
 
 [node name="bluelaser" type="Area2D" groups=["weapon"]]
 collision_layer = 16
-collision_mask = 0
-script = ExtResource("1_lnn8d")
+collision_mask = 2
+script = ExtResource("1_2elys")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_h6my0")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_eljv5")
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -22,4 +34,5 @@ shape = SubResource("RectangleShape2D_wcdff")
 position = Vector2(0, 9.53674e-07)
 scale = Vector2(1, 2.7)
 
+[connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_exited"]

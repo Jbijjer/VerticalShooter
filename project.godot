@@ -21,6 +21,7 @@ GameManager="*res://manager/game_manager.gd"
 ScoreManager="*res://manager/score_manager.gd"
 ComboManager="*res://manager/combo_manager.gd"
 WeaponManager="*res://manager/weapon_manager.gd"
+EnemyManager="*res://manager/enemy_manager.gd"
 
 [debug]
 

@@ -7,6 +7,6 @@
 font = ExtResource("1_wuxnx")
 
 [node name="combo_ui" type="Label"]
-text = "COMBO :"
+text = "COMBO : 0"
 label_settings = SubResource("LabelSettings_4r8iq")
 script = ExtResource("1_tw7o2")

@@ -6,6 +6,7 @@ extends Node
 func _ready():
 	SignalManager.player_hit.connect(on_player_hit)
 	SignalManager.player_heal.connect(on_player_heal)
+	SignalManager.progress_bar_updated.connect(on_progress_bar_updated)
 	update_hp()
 
 
@@ -15,6 +16,11 @@ func on_player_hit():
 
 func on_player_heal():
 	update_hp()
+	
+	
+func on_progress_bar_updated():
+	update_hp()
+	
 	
 func update_hp():
 	progress_bar.value = GameManager.HP

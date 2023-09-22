@@ -84,7 +84,6 @@ func on_enemy_died(points: int):
 
 func _on_area_2d_area_entered(area):
 	if area.is_in_group("weapon"):
-		area.queue_free()
 		hit(area.POWER)
 
 

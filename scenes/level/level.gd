@@ -9,7 +9,11 @@ extends Node
 @onready var enemy_spawner_7 = $HBEnemySpawner/EnemySpawner7
 @onready var enemy_spawner_8 = $HBEnemySpawner/EnemySpawner8
 
-var enemy = preload("res://scenes/enemy/enemy.tscn")
+var enemy_spawn_timer_max = 4
+var enemy_spawn_timer_min = 2
+
+var enemy = preload("res://scenes/enemies/enemy/enemy.tscn")
+var enemy_2 = preload("res://scenes/enemies/enemy_2/enemy_2.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	clean_scene()
@@ -25,7 +29,12 @@ func _on_enemy_spawn_timer_timeout():
 	
 	
 func spawn_enemy():	
-	var e = enemy.instantiate() as Node2D
+	var e
+	if (randf_range(0, 100) > (100 - (GameManager.level * 10))):
+		e = enemy_2.instantiate() as Node2D
+	else:
+		e = enemy.instantiate() as Node2D	
+	
 	get_tree().root.add_child(e)
 	var i = randi_range(1, 8)
 	match i:
@@ -45,7 +54,8 @@ func spawn_enemy():
 			e.global_position = enemy_spawner_7.global_position
 		8: 
 			e.global_position = enemy_spawner_8.global_position
-	enemy_spawn_timer.wait_time = randi_range(2, 4)
+			
+	enemy_spawn_timer.wait_time = randf_range(enemy_spawn_timer_min, enemy_spawn_timer_max)
 	
 
 func clean_scene():

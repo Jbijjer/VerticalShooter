@@ -1,8 +1,9 @@
 extends Node
 
 var score: int = 0
+var score_needed_base = 500
+var score_needed_growth = 500
 var level_up_score_needed = 500
-var score_needed_growth = 250
 
 func _ready():
 	SignalManager.score_updated.connect(on_score_updated)
@@ -16,4 +17,5 @@ func on_score_updated(amount: int):
 
 
 func on_level_up():
-	level_up_score_needed += score_needed_growth + ScoreManager.score
+	score_needed_base += score_needed_growth
+	level_up_score_needed += score_needed_base
