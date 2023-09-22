@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://p5qxspebac7p"]
+[gd_scene load_steps=10 format=3 uid="uid://p5qxspebac7p"]
 
 [ext_resource type="Script" path="res://scenes/level/level.gd" id="1_dqotv"]
 [ext_resource type="PackedScene" uid="uid://cu1bmcpku7y8" path="res://ui/level_up_ui/level_up_ui.tscn" id="2_shtdd"]
 [ext_resource type="PackedScene" uid="uid://chicrpt21jw35" path="res://ui/score_ui/score_ui.tscn" id="3_63h40"]
 [ext_resource type="PackedScene" uid="uid://b3n1p4voju61h" path="res://ui/pause_ui/pause_ui.tscn" id="3_k2cp0"]
 [ext_resource type="PackedScene" uid="uid://c8ycjh7cfaoi" path="res://ui/combo_ui/combo_ui.tscn" id="3_yjcv8"]
+[ext_resource type="PackedScene" uid="uid://dnp5omn5i604c" path="res://ui/game_over_ui/game_over_ui.tscn" id="4_2w670"]
 [ext_resource type="PackedScene" uid="uid://cgxyj8f7wq5dx" path="res://scenes/background/background.tscn" id="4_c0ur0"]
 [ext_resource type="PackedScene" uid="uid://ccjevfme2ltui" path="res://scenes/player/player.tscn" id="5_d0grk"]
 [ext_resource type="PackedScene" uid="uid://ckel7t6716o01" path="res://ui/life_ui/life_ui.tscn" id="7_ojott"]
@@ -16,6 +17,8 @@ script = ExtResource("1_dqotv")
 visible = false
 
 [node name="pause_ui" parent="." instance=ExtResource("3_k2cp0")]
+
+[node name="game_over_ui" parent="." instance=ExtResource("4_2w670")]
 
 [node name="background" parent="." instance=ExtResource("4_c0ur0")]
 position = Vector2(-5, -13)

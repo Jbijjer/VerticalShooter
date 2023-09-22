@@ -8,7 +8,8 @@ func _ready():
 
 func on_level_up():
 	show()
-	GameManager.pause_game()
+	GameManager.is_leveling_up = true
+	SignalManager.pause_game.emit()
 
 
 func _on_upgrade_1_pressed():
@@ -34,4 +35,5 @@ func _on_upgrade_4_pressed():
 	
 func quit_upgrades():	
 	hide()
-	GameManager.pause_game()
+	SignalManager.pause_game.emit()
+	GameManager.is_leveling_up = false
