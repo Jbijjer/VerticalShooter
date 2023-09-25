@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://p5qxspebac7p"]
+[gd_scene load_steps=12 format=3 uid="uid://p5qxspebac7p"]
 
 [ext_resource type="Script" path="res://scenes/level/level.gd" id="1_dqotv"]
 [ext_resource type="PackedScene" uid="uid://cu1bmcpku7y8" path="res://ui/level_up_ui/level_up_ui.tscn" id="2_shtdd"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://cgxyj8f7wq5dx" path="res://scenes/background/background.tscn" id="4_c0ur0"]
 [ext_resource type="PackedScene" uid="uid://ccjevfme2ltui" path="res://scenes/player/player.tscn" id="5_d0grk"]
 [ext_resource type="PackedScene" uid="uid://ckel7t6716o01" path="res://ui/life_ui/life_ui.tscn" id="7_ojott"]
+[ext_resource type="PackedScene" uid="uid://w27nolbvijk1" path="res://ui/enemy_killed_ui/enemy_killed_ui.tscn" id="9_60pmi"]
+[ext_resource type="PackedScene" uid="uid://wk03f3kbv7j1" path="res://ui/enemy_saved_ui/enemy_saved_ui.tscn" id="10_sbxgh"]
 
 [node name="level" type="Node"]
 script = ExtResource("1_dqotv")
@@ -47,6 +49,12 @@ theme_override_constants/separation = 7
 layout_mode = 2
 
 [node name="combo_ui" parent="MCLabels/VBoxContainer" instance=ExtResource("3_yjcv8")]
+layout_mode = 2
+
+[node name="enemy_killed_ui" parent="MCLabels/VBoxContainer" instance=ExtResource("9_60pmi")]
+layout_mode = 2
+
+[node name="enemy_killed_ui2" parent="MCLabels/VBoxContainer" instance=ExtResource("10_sbxgh")]
 layout_mode = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MCLabels"]

@@ -4,6 +4,7 @@ extends CanvasLayer
 
 func _ready():
 	SignalManager.player_died.connect(on_player_died)
+	SignalManager.level_finished.connect(on_player_died)
 	
 	
 func _process(delta):

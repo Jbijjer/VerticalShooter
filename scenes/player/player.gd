@@ -10,9 +10,6 @@ var cur_speed: float = MIN_SPEED
 
 @export var laser = preload("res://scenes/laser/bluelaser.tscn")
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	SignalManager.enemy_died.connect(on_enemy_died)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -77,9 +74,6 @@ func hit(power: float):
 func die():
 	SignalManager.player_died.emit()
 	queue_free()
-
-func on_enemy_died(points: int):
-	pass
 
 
 func _on_area_2d_area_entered(area):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cu1bmcpku7y8"]
+[gd_scene load_steps=9 format=3 uid="uid://cu1bmcpku7y8"]
 
 [ext_resource type="Script" path="res://ui/level_up_ui/level_up_ui.gd" id="1_bvi5p"]
 [ext_resource type="FontFile" uid="uid://tel1w5ccqqwi" path="res://assets/font/kenvector_future.ttf" id="2_2nbqm"]
@@ -21,6 +21,8 @@ shadow_size = 2
 shadow_color = Color(0.678431, 0.678431, 0.678431, 0.321569)
 
 [sub_resource type="Theme" id="Theme_bbn8m"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2k6dc"]
 
 [node name="level_up_ui" type="CanvasLayer"]
 process_mode = 3
@@ -54,7 +56,11 @@ label_settings = SubResource("LabelSettings_nyeie")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Upgrade1" type="Button" parent="MC/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MC/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Upgrade1" type="Button" parent="MC/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_bbn8m")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -70,22 +76,7 @@ text = "Health Max +"
 icon = ExtResource("4_13t1f")
 icon_alignment = 1
 
-[node name="Upgrade2" type="Button" parent="MC/VBoxContainer"]
-layout_mode = 2
-theme = SubResource("Theme_bbn8m")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_gg4li")
-text = "Heal all HP"
-icon = ExtResource("4_13t1f")
-icon_alignment = 1
-
-[node name="Upgrade3" type="Button" parent="MC/VBoxContainer"]
+[node name="Upgrade3" type="Button" parent="MC/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_bbn8m")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -100,7 +91,7 @@ text = "points growth ++"
 icon = ExtResource("4_13t1f")
 icon_alignment = 1
 
-[node name="Upgrade4" type="Button" parent="MC/VBoxContainer"]
+[node name="Upgrade4" type="Button" parent="MC/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
@@ -114,7 +105,29 @@ text = "Damage ++"
 icon = ExtResource("4_13t1f")
 icon_alignment = 1
 
-[connection signal="pressed" from="MC/VBoxContainer/Upgrade1" to="." method="_on_upgrade_1_pressed"]
-[connection signal="pressed" from="MC/VBoxContainer/Upgrade2" to="." method="_on_upgrade_2_pressed"]
-[connection signal="pressed" from="MC/VBoxContainer/Upgrade3" to="." method="_on_upgrade_3_pressed"]
-[connection signal="pressed" from="MC/VBoxContainer/Upgrade4" to="." method="_on_upgrade_4_pressed"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MC/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 150
+alignment = 1
+
+[node name="Label" type="Label" parent="MC/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Left Arrow"
+label_settings = SubResource("LabelSettings_2k6dc")
+
+[node name="Label2" type="Label" parent="MC/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Down Arrow"
+
+[node name="Label3" type="Label" parent="MC/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Right Arrow
+"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="pressed" from="MC/VBoxContainer/HBoxContainer/Upgrade1" to="." method="_on_upgrade_1_pressed"]
+[connection signal="pressed" from="MC/VBoxContainer/HBoxContainer/Upgrade3" to="." method="_on_upgrade_3_pressed"]
+[connection signal="pressed" from="MC/VBoxContainer/HBoxContainer/Upgrade4" to="." method="_on_upgrade_4_pressed"]

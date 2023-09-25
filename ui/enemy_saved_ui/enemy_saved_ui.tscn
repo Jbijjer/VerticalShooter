@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://wk03f3kbv7j1"]
+
+[ext_resource type="FontFile" uid="uid://cnacftrakk1vh" path="res://assets/font/kenvector_future_thin.ttf" id="1_mpn06"]
+[ext_resource type="Script" path="res://ui/enemy_saved_ui/enemy_saved_ui.gd" id="2_sovgc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4r8iq"]
+font = ExtResource("1_mpn06")
+
+[node name="enemy_saved_ui" type="Label"]
+text = "ENEMY SAVED : 0"
+label_settings = SubResource("LabelSettings_4r8iq")
+script = ExtResource("2_sovgc")

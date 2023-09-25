@@ -1,15 +1,15 @@
 extends CharacterBody2D
 
-@export var hp = 3
-@export var points = 150
-@onready var laser = preload("res://scenes/laser/greenlaser.tscn")
+@export var hp = 1
+@export var points = 300
+@onready var laser = preload("res://scenes/laser/redlaser.tscn")
 @onready var sprite_2d = $Sprite2D
 var is_dying = false
+var is_hidden = false
 @onready var timer = $Timer
 var direction_x = 1
 
 var speed = EnemyManager.speed
-var is_hidden = false
 	
 func _ready():
 	SignalManager.start_final_blitz.connect(on_final_blitz)
@@ -35,10 +35,13 @@ func update_interface():
 	SignalManager.enemy_explodes.emit()
 	
 
-func _physics_process(delta):
+func _physics_process(delta):	
 	if (!is_hidden):
-		velocity = Vector2(0, speed)
-		
+		velocity = Vector2(speed * direction_x, speed)
+		if global_position.x >= 700:
+			direction_x = -1
+		if global_position.x <= 0:
+			direction_x = 1
 		
 		move_and_slide()
 	
