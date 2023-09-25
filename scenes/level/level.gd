@@ -37,6 +37,7 @@ func _process(delta):
 	if level_1_3_limit <= GameManager.enemy_killed and current_sublevel == 2:
 		var enemies = get_tree().get_nodes_in_group("enemy")
 		for enemy in enemies:
+			print(enemy.global_position.y)
 			if !enemy.global_position.y == -25:
 				enemy.queue_free()
 		SignalManager.start_final_blitz.emit()

@@ -19,7 +19,6 @@ func shoot(gp: Vector2, is_player: bool):
 		direction = -1
 	else:
 		direction = 1
-		animated_sprite_2d.flip_v = true
 
 
 func _on_screen_exited():
