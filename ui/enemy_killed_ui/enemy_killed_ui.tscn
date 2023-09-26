@@ -7,6 +7,6 @@
 font = ExtResource("1_1q1a2")
 
 [node name="enemy_killed_ui" type="Label"]
-text = "ENEMY KILLED : 0"
+text = "KILLS : 0"
 label_settings = SubResource("LabelSettings_4r8iq")
 script = ExtResource("2_60pda")

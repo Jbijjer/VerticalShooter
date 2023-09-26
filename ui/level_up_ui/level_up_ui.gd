@@ -12,7 +12,8 @@ func _process(delta):
 	if timer.is_stopped():
 		if (GameManager.is_leveling_up):
 			if Input.is_action_just_pressed("Left"):
-				_on_upgrade_1_pressed()
+				if PlayerManager.lives < 3:
+					_on_upgrade_1_pressed()
 			elif Input.is_action_just_pressed("Down"):
 				_on_upgrade_3_pressed()
 			elif Input.is_action_just_pressed("Right"):
@@ -22,7 +23,6 @@ func on_level_up():
 	timer.start()
 	show()
 	GameManager.is_leveling_up = true
-	GameManager.level += 1
 	SignalManager.pause_game.emit()
 	var weapons = get_tree().get_nodes_in_group("weapon")
 	for weapon in weapons:
@@ -30,25 +30,24 @@ func on_level_up():
 
 
 func _on_upgrade_1_pressed():
-	GameManager.MAX_HP += 1
-	GameManager.HP += 1
-	SignalManager.progress_bar_updated.emit()
-	quit_upgrades()
-
-
-func _on_upgrade_2_pressed():
-	GameManager.HP = GameManager.MAX_HP
+	PlayerManager.lives += 1
 	SignalManager.player_heal.emit()
 	quit_upgrades()
 
 
+#func _on_upgrade_2_pressed():
+#	GameManager.HP = GameManager.MAX_HP
+#	SignalManager.player_heal.emit()
+#	quit_upgrades()
+
+
 func _on_upgrade_3_pressed():
-	ComboManager.combo_growth += 0.05
+	PlayerManager.MAX_SPEED += 25
 	quit_upgrades()
 
 
 func _on_upgrade_4_pressed():
-	WeaponManager.weapon_power += 0.5
+	WeaponManager.weapon_power += 5
 	quit_upgrades()
 	
 	

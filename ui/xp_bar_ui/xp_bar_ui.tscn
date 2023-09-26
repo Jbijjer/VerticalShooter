@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgciyrnwhkn2b"]
+
+[ext_resource type="Script" path="res://ui/xp_bar_ui/xp_bar_ui.gd" id="1_2qwh3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dnae"]
+bg_color = Color(0, 0.956863, 0.262745, 1)
+
+[node name="xp_bar_ui" type="ProgressBar"]
+offset_right = 720.0
+offset_bottom = 27.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_7dnae")
+show_percentage = false
+script = ExtResource("1_2qwh3")

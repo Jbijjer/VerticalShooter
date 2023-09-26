@@ -11,6 +11,7 @@ collision_layer = 16
 script = ExtResource("1_ukdxv")
 
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["weapon"]]
+rotation = -3.14154
 texture = ExtResource("2_lwtmw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -9,17 +9,16 @@ extends Node
 @onready var enemy_spawner_7 = $HBEnemySpawner/EnemySpawner7
 @onready var enemy_spawner_8 = $HBEnemySpawner/EnemySpawner8
 
-var enemy_1 = preload("res://scenes/enemies/enemy/enemy.tscn")
-var enemy_2 = preload("res://scenes/enemies/enemy_2/enemy_2.tscn")
-var enemy_3 = preload("res://scenes/enemies/enemy_3/enemy_3.tscn")
+var enemy1green = preload("res://scenes/enemies/enemy1green/enemy1green.tscn")
+var enemy1red = preload("res://scenes/enemies/enemy1red/enemy1red.tscn")
+var enemy2red = preload("res://scenes/enemies/enemy2red/enemy2red.tscn")
 
-var enemy_1_probability = 90
-var enemy_2_probability = 10
-var enemy_3_probability = 0
+var enemy_2_probability = 35
+var enemy_3_probability = -5
 
-var level_1_1_limit = 5
-var level_1_2_limit = 10
-var level_1_3_limit = 15
+var level_1_1_limit = 20
+var level_1_2_limit = 40
+var level_1_3_limit = 65
 var current_sublevel = 0
 
 
@@ -35,27 +34,27 @@ func _process(delta):
 			SignalManager.level_finished.emit()
 			
 	if level_1_3_limit <= GameManager.enemy_killed and current_sublevel == 2:
+		enemy_spawn_timer.stop()
 		var enemies = get_tree().get_nodes_in_group("enemy")
 		for enemy in enemies:
-			print(enemy.global_position.y)
 			if !enemy.global_position.y == -25:
-				enemy.queue_free()
+				return
 		SignalManager.start_final_blitz.emit()
 		current_sublevel = 3
 				
 	if level_1_2_limit <= GameManager.enemy_killed and current_sublevel == 1:
 		GameManager.enemy_spawn_timer_min = 1.0
-		GameManager.enemy_spawn_timer_max = 3.5
+		GameManager.enemy_spawn_timer_max = 2.0
 		current_sublevel = 2
-		enemy_2_probability = 50
-		enemy_3_probability = 20
+		enemy_2_probability = 70
+		enemy_3_probability = 40
 		
 	if level_1_1_limit <= GameManager.enemy_killed and current_sublevel == 0:
 		GameManager.enemy_spawn_timer_min = 1.5
-		GameManager.enemy_spawn_timer_max = 4.0
+		GameManager.enemy_spawn_timer_max = 3.0
 		current_sublevel = 1
-		enemy_2_probability = 20
-		enemy_3_probability = 10
+		enemy_2_probability = 30
+		enemy_3_probability = 30
 		
 
 func _on_enemy_spawn_timer_timeout():
@@ -66,12 +65,12 @@ func _on_enemy_spawn_timer_timeout():
 func spawn_enemy():	
 	var e
 	var rnd = randi_range(0,100)
-	if enemy_3_probability >= rnd:
-		e = enemy_3.instantiate() as Node2D
-	elif enemy_2_probability >=rnd:
-		e = enemy_2.instantiate() as Node2D
+	if enemy_3_probability >=rnd:
+		e = enemy2red.instantiate() as Node2D
+	if enemy_2_probability >=rnd:
+		e = enemy1green.instantiate() as Node2D
 	else:
-		e = enemy_1.instantiate() as Node2D
+		e = enemy1red.instantiate() as Node2D
 	
 	get_tree().root.add_child(e)
 	var i = randi_range(1, 8)

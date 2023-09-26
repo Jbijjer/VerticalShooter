@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://brrdps6u3goyu"]
+
+[ext_resource type="Script" path="res://ui/level_completed_ui/level_completed_ui.gd" id="1_uc5cw"]
+[ext_resource type="FontFile" uid="uid://tel1w5ccqqwi" path="res://assets/font/kenvector_future.ttf" id="2_2gog1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_43ygm"]
+font = ExtResource("2_2gog1")
+font_size = 51
+font_color = Color(0, 0.501961, 0.686275, 1)
+
+[node name="level_completed_ui" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_uc5cw")
+
+[node name="TitleLabel" type="Label" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "LEVEL COMPLETED"
+label_settings = SubResource("LabelSettings_43ygm")

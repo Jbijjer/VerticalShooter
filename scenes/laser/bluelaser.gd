@@ -1,7 +1,7 @@
 extends Area2D
 
 var speed = 10.0
-const POWER = 1
+const POWER = 5
 @onready var animated_sprite_2d = $AnimatedSprite2D
 
 

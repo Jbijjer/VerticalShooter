@@ -1,43 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://ckel7t6716o01"]
+[gd_scene load_steps=3 format=3 uid="uid://ckel7t6716o01"]
 
 [ext_resource type="Script" path="res://ui/life_ui/life_ui.gd" id="1_2aot3"]
-[ext_resource type="FontFile" uid="uid://cnacftrakk1vh" path="res://assets/font/kenvector_future_thin.ttf" id="1_8orbw"]
+[ext_resource type="Texture2D" uid="uid://c3thp6c6afllp" path="res://assets/PNG/UI/playerLife1_blue.png" id="1_m6jue"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_3ejv3"]
-font = ExtResource("1_8orbw")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_080jh"]
-bg_color = Color(0.882353, 0.0117647, 0.0117647, 0.47451)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2id5o"]
-bg_color = Color(0.25098, 0.709804, 0.227451, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[node name="life_ui" type="Label"]
-offset_left = -200.0
-offset_right = -168.0
-offset_bottom = 21.0
-text = "HP :"
-label_settings = SubResource("LabelSettings_3ejv3")
+[node name="life_ui" type="Node2D"]
 script = ExtResource("1_2aot3")
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
-layout_mode = 2
-offset_left = 38.0
-offset_top = 3.0
-offset_right = 189.0
-offset_bottom = 15.0
-size_flags_horizontal = 8
-theme_override_styles/background = SubResource("StyleBoxFlat_080jh")
-theme_override_styles/fill = SubResource("StyleBoxFlat_2id5o")
-max_value = 3.0
-step = 1.0
-value = 3.0
-show_percentage = false
+[node name="Life1" type="Sprite2D" parent="."]
+position = Vector2(101.5, 20)
+texture = ExtResource("1_m6jue")
+
+[node name="Life2" type="Sprite2D" parent="."]
+position = Vector2(61.5, 20)
+texture = ExtResource("1_m6jue")
+
+[node name="Life3" type="Sprite2D" parent="."]
+position = Vector2(20.5, 20)
+texture = ExtResource("1_m6jue")

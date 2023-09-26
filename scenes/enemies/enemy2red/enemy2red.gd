@@ -2,32 +2,34 @@ extends CharacterBody2D
 
 var enemy = Enemy.new()
 
-@onready var timer = $Timer
+@onready var collision_shape_2d_2 = $Area2D/CollisionShape2D2
+
+@onready var laser = preload("res://scenes/laser/redlaser.tscn")
 @onready var sprite_2d = $Sprite2D
-@onready var laser = preload("res://scenes/laser/greenlaser.tscn")
+@onready var timer = $Timer
+var direction_x = 1
 	
 func _ready():
 	SignalManager.start_final_blitz.connect(on_final_blitz)
-	enemy.hp = 3
-	enemy.points = 200
-	enemy.direction_x = 0
-	enemy.direction_y = 1
-	
+	enemy.hp = 10
+	enemy.points = 250
+	enemy.direction_x = 1
+	enemy.direction_y = 1	
 
-func _physics_process(delta):
+func _physics_process(delta):	
 	velocity = enemy.move(global_position)
 	move_and_slide()
-			
-	
+
 func _process(delta):	
 	enemy.process(sprite_2d)
+	if enemy.is_dying:
+		collision_shape_2d_2.set_deferred("disabled", true)
 	if enemy.is_dead:
 		queue_free()
 			
 			
 func on_final_blitz():
-	enemy.speed = EnemyManager.max_speed
-	enemy.is_hidden = false		
+	enemy.final_blitz()
 		
 
 func hit(power: float):

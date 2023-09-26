@@ -5,25 +5,30 @@ var enemy = Enemy.new()
 @onready var laser = preload("res://scenes/laser/redlaser.tscn")
 @onready var sprite_2d = $Sprite2D
 @onready var timer = $Timer
-var direction_x = 1
+@onready var collision_shape_2d_2 = $Area2D/CollisionShape2D2
 	
+
 func _ready():
 	SignalManager.start_final_blitz.connect(on_final_blitz)
-	enemy.hp = 1
-	enemy.points = 300
-	enemy.direction_x = 1
-	enemy.direction_y = 1	
-
-func _physics_process(delta):	
-	velocity = enemy.move(global_position)
+	enemy.hp = 10
+	enemy.points = 75
+	enemy.direction_x = 0
+	enemy.direction_y = 1
+			
+			
+func _physics_process(delta):
+	velocity = enemy.move(global_position)		
 	move_and_slide()
+	
 
 func _process(delta):	
 	enemy.process(sprite_2d)
+	if enemy.is_dying:
+		collision_shape_2d_2.set_deferred("disabled", true)
 	if enemy.is_dead:
 		queue_free()
-			
-			
+
+
 func on_final_blitz():
 	enemy.final_blitz()
 		

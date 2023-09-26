@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://p5qxspebac7p"]
+[gd_scene load_steps=13 format=3 uid="uid://p5qxspebac7p"]
 
 [ext_resource type="Script" path="res://scenes/level/level.gd" id="1_dqotv"]
 [ext_resource type="PackedScene" uid="uid://cu1bmcpku7y8" path="res://ui/level_up_ui/level_up_ui.tscn" id="2_shtdd"]
@@ -8,9 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://dnp5omn5i604c" path="res://ui/game_over_ui/game_over_ui.tscn" id="4_2w670"]
 [ext_resource type="PackedScene" uid="uid://cgxyj8f7wq5dx" path="res://scenes/background/background.tscn" id="4_c0ur0"]
 [ext_resource type="PackedScene" uid="uid://ccjevfme2ltui" path="res://scenes/player/player.tscn" id="5_d0grk"]
+[ext_resource type="PackedScene" uid="uid://brrdps6u3goyu" path="res://ui/level_completed_ui/level_completed_ui.tscn" id="5_e8ybj"]
 [ext_resource type="PackedScene" uid="uid://ckel7t6716o01" path="res://ui/life_ui/life_ui.tscn" id="7_ojott"]
 [ext_resource type="PackedScene" uid="uid://w27nolbvijk1" path="res://ui/enemy_killed_ui/enemy_killed_ui.tscn" id="9_60pmi"]
-[ext_resource type="PackedScene" uid="uid://wk03f3kbv7j1" path="res://ui/enemy_saved_ui/enemy_saved_ui.tscn" id="10_sbxgh"]
+[ext_resource type="PackedScene" uid="uid://dgciyrnwhkn2b" path="res://ui/xp_bar_ui/xp_bar_ui.tscn" id="12_1b6ly"]
 
 [node name="level" type="Node"]
 script = ExtResource("1_dqotv")
@@ -22,6 +23,8 @@ visible = false
 
 [node name="game_over_ui" parent="." instance=ExtResource("4_2w670")]
 
+[node name="level_completed_ui" parent="." instance=ExtResource("5_e8ybj")]
+
 [node name="background" parent="." instance=ExtResource("4_c0ur0")]
 position = Vector2(-5, -13)
 
@@ -32,38 +35,41 @@ position = Vector2(350, 867)
 wait_time = 2.0
 autostart = true
 
+[node name="xp_bar_ui" parent="." instance=ExtResource("12_1b6ly")]
+
 [node name="MCLabels" type="MarginContainer" parent="."]
-offset_right = 567.0
-offset_bottom = 65.0
+offset_right = 720.0
+offset_bottom = 93.0
 theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
+theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MCLabels"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MCLabels"]
+layout_mode = 2
+theme_override_constants/separation = 350
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MCLabels/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_constants/separation = 7
 
-[node name="score_ui" parent="MCLabels/VBoxContainer" instance=ExtResource("3_63h40")]
+[node name="score_ui" parent="MCLabels/HBoxContainer/VBoxContainer" instance=ExtResource("3_63h40")]
 layout_mode = 2
 
-[node name="combo_ui" parent="MCLabels/VBoxContainer" instance=ExtResource("3_yjcv8")]
+[node name="combo_ui" parent="MCLabels/HBoxContainer/VBoxContainer" instance=ExtResource("3_yjcv8")]
 layout_mode = 2
 
-[node name="enemy_killed_ui" parent="MCLabels/VBoxContainer" instance=ExtResource("9_60pmi")]
+[node name="enemy_killed_ui" parent="MCLabels/HBoxContainer/VBoxContainer" instance=ExtResource("9_60pmi")]
 layout_mode = 2
 
-[node name="enemy_killed_ui2" parent="MCLabels/VBoxContainer" instance=ExtResource("10_sbxgh")]
-layout_mode = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="MCLabels"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MCLabels/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 alignment = 2
 
-[node name="life_ui" parent="MCLabels/VBoxContainer2" instance=ExtResource("7_ojott")]
+[node name="life_ui" parent="MCLabels/HBoxContainer/VBoxContainer2" instance=ExtResource("7_ojott")]
 layout_mode = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
