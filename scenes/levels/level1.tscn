@@ -1,0 +1,107 @@
+[gd_scene load_steps=13 format=3 uid="uid://p5qxspebac7p"]
+
+[ext_resource type="Script" path="res://scenes/levels/level1.gd" id="1_kdktg"]
+[ext_resource type="PackedScene" uid="uid://cu1bmcpku7y8" path="res://ui/level_up_ui/level_up_ui.tscn" id="2_i0dyx"]
+[ext_resource type="PackedScene" uid="uid://b3n1p4voju61h" path="res://ui/pause_ui/pause_ui.tscn" id="3_meh2l"]
+[ext_resource type="PackedScene" uid="uid://dnp5omn5i604c" path="res://ui/game_over_ui/game_over_ui.tscn" id="4_tn388"]
+[ext_resource type="PackedScene" uid="uid://brrdps6u3goyu" path="res://ui/level_completed_ui/level_completed_ui.tscn" id="5_5ky81"]
+[ext_resource type="PackedScene" uid="uid://cgxyj8f7wq5dx" path="res://scenes/background/background.tscn" id="6_6istg"]
+[ext_resource type="PackedScene" uid="uid://ccjevfme2ltui" path="res://scenes/player/player.tscn" id="7_hwtqr"]
+[ext_resource type="PackedScene" uid="uid://dgciyrnwhkn2b" path="res://ui/xp_bar_ui/xp_bar_ui.tscn" id="8_hnkol"]
+[ext_resource type="PackedScene" uid="uid://chicrpt21jw35" path="res://ui/score_ui/score_ui.tscn" id="9_0lry2"]
+[ext_resource type="PackedScene" uid="uid://c8ycjh7cfaoi" path="res://ui/combo_ui/combo_ui.tscn" id="10_65vwb"]
+[ext_resource type="PackedScene" uid="uid://w27nolbvijk1" path="res://ui/enemy_killed_ui/enemy_killed_ui.tscn" id="11_q7eid"]
+[ext_resource type="PackedScene" uid="uid://ckel7t6716o01" path="res://ui/life_ui/life_ui.tscn" id="12_4pw62"]
+
+[node name="level1" type="Node"]
+script = ExtResource("1_kdktg")
+
+[node name="level_up_ui" parent="." instance=ExtResource("2_i0dyx")]
+
+[node name="pause_ui" parent="." instance=ExtResource("3_meh2l")]
+
+[node name="game_over_ui" parent="." instance=ExtResource("4_tn388")]
+
+[node name="level_completed_ui" parent="." instance=ExtResource("5_5ky81")]
+
+[node name="background" parent="." instance=ExtResource("6_6istg")]
+position = Vector2(-5, -13)
+
+[node name="player" parent="." instance=ExtResource("7_hwtqr")]
+position = Vector2(350, 867)
+
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="xp_bar_ui" parent="." instance=ExtResource("8_hnkol")]
+z_index = 2
+
+[node name="MCLabels" type="MarginContainer" parent="."]
+z_index = 2
+offset_right = 721.0
+offset_bottom = 109.0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MCLabels"]
+layout_mode = 2
+theme_override_constants/separation = 420
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MCLabels/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 7
+
+[node name="score_ui" parent="MCLabels/HBoxContainer/VBoxContainer" instance=ExtResource("9_0lry2")]
+layout_mode = 2
+
+[node name="combo_ui" parent="MCLabels/HBoxContainer/VBoxContainer" instance=ExtResource("10_65vwb")]
+layout_mode = 2
+
+[node name="enemy_killed_ui" parent="MCLabels/HBoxContainer/VBoxContainer" instance=ExtResource("11_q7eid")]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MCLabels/HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="life_ui" parent="MCLabels/HBoxContainer/VBoxContainer2" instance=ExtResource("12_4pw62")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(360, 491)
+
+[node name="HBEnemySpawner" type="HBoxContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -41.0
+grow_horizontal = 2
+
+[node name="EnemySpawner1" type="Marker2D" parent="HBEnemySpawner"]
+position = Vector2(80, 0)
+
+[node name="EnemySpawner2" type="Marker2D" parent="HBEnemySpawner"]
+position = Vector2(160, 0)
+
+[node name="EnemySpawner3" type="Marker2D" parent="HBEnemySpawner"]
+position = Vector2(240, 0)
+
+[node name="EnemySpawner4" type="Marker2D" parent="HBEnemySpawner"]
+position = Vector2(320, 0)
+
+[node name="EnemySpawner5" type="Marker2D" parent="HBEnemySpawner"]
+position = Vector2(400, 0)
+
+[node name="EnemySpawner6" type="Marker2D" parent="HBEnemySpawner"]
+position = Vector2(480, 0)
+
+[node name="EnemySpawner7" type="Marker2D" parent="HBEnemySpawner"]
+position = Vector2(560, 0)
+
+[node name="EnemySpawner8" type="Marker2D" parent="HBEnemySpawner"]
+position = Vector2(640, 0)
+
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]

@@ -13,9 +13,9 @@ var enemy1green = preload("res://scenes/enemies/enemy1green/enemy1green.tscn")
 var enemy1red = preload("res://scenes/enemies/enemy1red/enemy1red.tscn")
 var enemy_2_probability = -5
 
-var level_1_1_limit = 15
-var level_1_2_limit = 30
-var level_1_3_limit = 45
+var level_1_1_limit = 5#15
+var level_1_2_limit = 10#30
+var level_1_3_limit = 15#45
 var current_sublevel = 0
 
 

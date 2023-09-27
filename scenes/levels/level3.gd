@@ -8,17 +8,20 @@ extends Node
 @onready var enemy_spawner_6 = $HBEnemySpawner/EnemySpawner6
 @onready var enemy_spawner_7 = $HBEnemySpawner/EnemySpawner7
 @onready var enemy_spawner_8 = $HBEnemySpawner/EnemySpawner8
+@onready var score_ui = $MCLabels/HBoxContainer/VBoxContainer/score_ui
+@onready var combo_ui = $MCLabels/HBoxContainer/VBoxContainer/combo_ui
 
 var enemy1green = preload("res://scenes/enemies/enemy1green/enemy1green.tscn")
+var enemy2green = preload("res://scenes/enemies/enemy2green/enemy2green.tscn")
 var enemy1red = preload("res://scenes/enemies/enemy1red/enemy1red.tscn")
 var enemy2red = preload("res://scenes/enemies/enemy2red/enemy2red.tscn")
 
-var enemy_2_probability = 35
-var enemy_3_probability = -5
+var enemy_2_probability = 55
+var enemy_3_probability = 10
 
-var level_1_1_limit = 20
-var level_1_2_limit = 40
-var level_1_3_limit = 65
+var level_3_1_limit = 20
+var level_3_2_limit = 40
+var level_3_3_limit = 65
 var current_sublevel = 0
 
 
@@ -28,12 +31,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if level_1_3_limit <= GameManager.enemy_killed and current_sublevel == 3:
-		print(str(get_tree().get_nodes_in_group("enemy").size()))
+	if level_3_3_limit <= GameManager.enemy_killed and current_sublevel == 3:
 		if get_tree().get_nodes_in_group("enemy").size() <= 0:
 			SignalManager.level_finished.emit()
 			
-	if level_1_3_limit <= GameManager.enemy_killed and current_sublevel == 2:
+	if level_3_3_limit <= GameManager.enemy_killed and current_sublevel == 2:
 		enemy_spawn_timer.stop()
 		var enemies = get_tree().get_nodes_in_group("enemy")
 		for enemy in enemies:
@@ -42,18 +44,18 @@ func _process(delta):
 		SignalManager.start_final_blitz.emit()
 		current_sublevel = 3
 				
-	if level_1_2_limit <= GameManager.enemy_killed and current_sublevel == 1:
+	if level_3_2_limit <= GameManager.enemy_killed and current_sublevel == 1:
 		GameManager.enemy_spawn_timer_min = 1.0
 		GameManager.enemy_spawn_timer_max = 2.0
 		current_sublevel = 2
-		enemy_2_probability = 70
-		enemy_3_probability = 40
+		enemy_2_probability = 80
+		enemy_3_probability = 50
 		
-	if level_1_1_limit <= GameManager.enemy_killed and current_sublevel == 0:
+	if level_3_1_limit <= GameManager.enemy_killed and current_sublevel == 0:
 		GameManager.enemy_spawn_timer_min = 1.5
 		GameManager.enemy_spawn_timer_max = 3.0
 		current_sublevel = 1
-		enemy_2_probability = 30
+		enemy_2_probability = 60
 		enemy_3_probability = 30
 		
 
@@ -66,11 +68,11 @@ func spawn_enemy():
 	var e
 	var rnd = randi_range(0,100)
 	if enemy_3_probability >=rnd:
-		e = enemy2red.instantiate() as Node2D
-	if enemy_2_probability >=rnd:
+		e = enemy2green.instantiate() as Node2D
+	elif enemy_2_probability >=rnd:
 		e = enemy1green.instantiate() as Node2D
 	else:
-		e = enemy1red.instantiate() as Node2D
+		e = enemy2red.instantiate() as Node2D
 	
 	get_tree().root.add_child(e)
 	var i = randi_range(1, 8)
@@ -96,6 +98,9 @@ func spawn_enemy():
 	
 
 func clean_scene():
+	EnemyManager.speed = EnemyManager.MIN_SPEED
+	score_ui.text = str("SCORE : ", ScoreManager.score)
+	combo_ui.text = str("COMBO : ", ComboManager.cur_combo_count)
 	var enemies = get_tree().root.get_children()
 	for e in enemies:
 		if e.is_in_group("enemy"):

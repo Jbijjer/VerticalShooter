@@ -1,7 +1,5 @@
 extends Node
 
-var level1_scene = preload("res://scenes/levels/level1/level1.tscn")
-
 var is_game_over = false
 var is_paused = false
 var is_leveling_up = false
@@ -44,5 +42,5 @@ func new_game():
 	
 	
 func load_level_1() -> void:
-	get_tree().change_scene_to_packed(level1_scene)
+	get_tree().change_scene_to_file(LevelManager.level1_scene)
 

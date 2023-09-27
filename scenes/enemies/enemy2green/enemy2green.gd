@@ -3,15 +3,15 @@ extends CharacterBody2D
 var enemy = Enemy.new()
 
 @onready var collision_shape_2d_2 = $Area2D/CollisionShape2D2
-@onready var laser = preload("res://scenes/laser/redlaser.tscn")
+@onready var laser = preload("res://scenes/laser/greenlaser.tscn")
 @onready var sprite_2d = $Sprite2D
 @onready var timer = $Timer
 var direction_x = 1
 	
 func _ready():
 	SignalManager.start_final_blitz.connect(on_final_blitz)
-	enemy.hp = 10
-	enemy.points = 350
+	enemy.hp = 25
+	enemy.points = 450
 	enemy.direction_x = 1
 	enemy.direction_y = 1	
 

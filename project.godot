@@ -23,6 +23,7 @@ ComboManager="*res://manager/combo_manager.gd"
 WeaponManager="*res://manager/weapon_manager.gd"
 EnemyManager="*res://manager/enemy_manager.gd"
 PlayerManager="*res://manager/player_manager.gd"
+LevelManager="*res://manager/level_manager.gd"
 
 [debug]
 

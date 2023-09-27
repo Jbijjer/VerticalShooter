@@ -1,7 +1,8 @@
 extends Node
 
+const MIN_SPEED = 100.0
 
-var speed = 100.0
+var speed = MIN_SPEED
 var max_speed = 200.0
 
 
