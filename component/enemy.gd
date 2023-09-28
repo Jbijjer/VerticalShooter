@@ -1,18 +1,31 @@
 extends CharacterBody2D
-class_name Enemy
 
-var hp = 1
-var points = 100
+class_name Enemy
 var is_dying = false
-var direction_x = 0
-var direction_y = 1
 var is_hidden = false
 var is_dead = false
 
+@export var laser = PackedScene
+@export var hp: int
+@export var points: int
+@export var direction_x: int
+@export var direction_y: int
+@onready var sprite_2d = $Sprite2D
+@onready var timer = $Timer
+@onready var collision_shape_2d_2 = $Area2D/CollisionShape2D2
+
 var speed = EnemyManager.speed
+	
+
+func _ready():
+	SignalManager.start_final_blitz.connect(on_final_blitz)
 
 
-func process(sprite_2d: AnimatedSprite2D):
+func _physics_process(delta):	
+	velocity = move(global_position)
+	move_and_slide()
+
+func _process(delta):	
 	if sprite_2d.get_animation() == "death":
 		if sprite_2d.is_playing():
 			if !is_dying:
@@ -20,6 +33,10 @@ func process(sprite_2d: AnimatedSprite2D):
 				is_dying = true
 		else:
 			is_dead = true
+	if is_dying:
+		collision_shape_2d_2.set_deferred("disabled", true)
+	if is_dead:
+		queue_free()
 			
 			
 func move(gp: Vector2):
@@ -58,7 +75,7 @@ func shoot(laser: PackedScene, gp: Vector2):
 		if hp > 0:
 			var l = laser.instantiate()
 			l.is_player_weapon = false
-			l.shoot(Vector2(gp.x, gp.y + 40), false)
+			l.shoot(Vector2(gp.x, gp.y + 40))
 			return l
 		return null
 	return null
@@ -81,3 +98,27 @@ func check_if_player_collision(area: Area2D, sprite_2d: AnimatedSprite2D):
 	if hp > 0:
 		if area.is_in_group("player"):
 				hit(100.0, sprite_2d)
+			
+			
+func on_final_blitz():
+	final_blitz()
+
+
+func _on_timer_timeout():
+	var l = shoot(laser, global_position)
+	if l != null:
+		get_tree().root.add_child(l)
+		l.play()
+	
+
+func _on_screen_exited():	
+	global_position.y = -25
+	exited_screen()
+
+
+func _on_area_entered(area):
+	check_if_hit(area, sprite_2d)
+				
+
+func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	check_if_player_collision(area, sprite_2d)

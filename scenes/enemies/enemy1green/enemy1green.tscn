@@ -1,6 +1,7 @@
-[gd_scene load_steps=55 format=3 uid="uid://bgl6gf05xgji5"]
+[gd_scene load_steps=56 format=3 uid="uid://bgl6gf05xgji5"]
 
-[ext_resource type="Script" path="res://scenes/enemies/enemy1green/enemy1green.gd" id="1_hvmmx"]
+[ext_resource type="Script" path="res://component/enemy.gd" id="1_bexhv"]
+[ext_resource type="PackedScene" uid="uid://b1g7maj6o7lrj" path="res://scenes/laser/greenlaser.tscn" id="2_d8r42"]
 [ext_resource type="Texture2D" uid="uid://dlpyw0v4uexq8" path="res://assets/PNG/Damage/Explosion/explosion 1.png" id="2_xmonj"]
 [ext_resource type="Texture2D" uid="uid://cj5rd5p8go0bx" path="res://assets/PNG/Enemies/enemyGreen5.png" id="3_06uxg"]
 
@@ -371,7 +372,11 @@ scale = Vector2(1.2, 1.2)
 collision_layer = 2
 collision_mask = 17
 motion_mode = 1
-script = ExtResource("1_hvmmx")
+script = ExtResource("1_bexhv")
+laser = ExtResource("2_d8r42")
+hp = 20
+points = 200
+direction_y = 1
 
 [node name="Area2D" type="Area2D" parent="." groups=["enemy"]]
 collision_layer = 19

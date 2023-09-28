@@ -1,7 +1,8 @@
-[gd_scene load_steps=55 format=3 uid="uid://brny3hlvrkcu"]
+[gd_scene load_steps=56 format=3 uid="uid://brny3hlvrkcu"]
 
-[ext_resource type="Script" path="res://scenes/enemies/enemy2red/enemy2red.gd" id="1_ro6gt"]
+[ext_resource type="Script" path="res://component/enemy.gd" id="1_5ut4r"]
 [ext_resource type="Texture2D" uid="uid://dlpyw0v4uexq8" path="res://assets/PNG/Damage/Explosion/explosion 1.png" id="2_5tln8"]
+[ext_resource type="PackedScene" uid="uid://17dcjebirlhe" path="res://scenes/laser/redlaser.tscn" id="2_1016s"]
 [ext_resource type="Texture2D" uid="uid://c5n2e3hxs6o2v" path="res://assets/PNG/Enemies/enemyRed2.png" id="3_hugjg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ldo44"]
@@ -371,7 +372,12 @@ scale = Vector2(1.2, 1.2)
 collision_layer = 2
 collision_mask = 17
 motion_mode = 1
-script = ExtResource("1_ro6gt")
+script = ExtResource("1_5ut4r")
+laser = ExtResource("2_1016s")
+hp = 10
+points = 150
+direction_x = 1
+direction_y = 1
 
 [node name="Area2D" type="Area2D" parent="." groups=["enemy"]]
 collision_layer = 19

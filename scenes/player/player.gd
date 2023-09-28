@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var sprite_2d = $Sprite2D
 
 @export var laser = preload("res://scenes/laser/bluelaser.tscn")
+@onready var audio_stream_player = $AudioStreamPlayer
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -64,6 +65,7 @@ func hit():
 	SignalManager.player_hit.emit()
 	if PlayerManager.lives <= 0:
 		sprite_2d.play("death")
+		audio_stream_player.play()
 		
 		
 func die():

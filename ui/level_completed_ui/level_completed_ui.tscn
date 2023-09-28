@@ -1,12 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://brrdps6u3goyu"]
+[gd_scene load_steps=6 format=3 uid="uid://brrdps6u3goyu"]
 
 [ext_resource type="Script" path="res://ui/level_completed_ui/level_completed_ui.gd" id="1_uc5cw"]
 [ext_resource type="FontFile" uid="uid://tel1w5ccqqwi" path="res://assets/font/kenvector_future.ttf" id="2_2gog1"]
+[ext_resource type="FontFile" uid="uid://cnacftrakk1vh" path="res://assets/font/kenvector_future_thin.ttf" id="3_ffwno"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_43ygm"]
 font = ExtResource("2_2gog1")
 font_size = 51
 font_color = Color(0, 0.501961, 0.686275, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ebirs"]
+font = ExtResource("3_ffwno")
+font_size = 30
+font_color = Color(0, 0.5, 0.683594, 1)
 
 [node name="level_completed_ui" type="CanvasLayer"]
 process_mode = 3
@@ -27,3 +33,18 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "LEVEL COMPLETED"
 label_settings = SubResource("LabelSettings_43ygm")
+
+[node name="SubTitle" type="Label" parent="TitleLabel"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.033
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 67.0
+offset_right = 582.738
+offset_bottom = 60.0
+text = "PRESS ENTER TO CONTINUE"
+label_settings = SubResource("LabelSettings_ebirs")
+horizontal_alignment = 1
+vertical_alignment = 1

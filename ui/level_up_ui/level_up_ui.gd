@@ -2,10 +2,11 @@ extends CanvasLayer
 
 @onready var title_label = $MC/VBoxContainer/TitleLabel
 @onready var timer = $Timer
+@onready var audio_stream_player = $AudioStreamPlayer
+
 
 func _ready():
-	SignalManager.level_up.connect(on_level_up)
-	
+	SignalManager.level_up.connect(on_level_up)	
 
 	
 func _process(delta):
@@ -22,6 +23,7 @@ func _process(delta):
 func on_level_up():
 	timer.start()
 	show()
+	audio_stream_player.play()
 	GameManager.is_leveling_up = true
 	SignalManager.pause_game.emit()
 	var weapons = get_tree().get_nodes_in_group("weapon")

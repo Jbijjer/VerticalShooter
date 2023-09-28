@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cu1bmcpku7y8"]
+[gd_scene load_steps=9 format=3 uid="uid://cu1bmcpku7y8"]
 
 [ext_resource type="Script" path="res://ui/level_up_ui/level_up_ui.gd" id="1_bvi5p"]
 [ext_resource type="FontFile" uid="uid://tel1w5ccqqwi" path="res://assets/font/kenvector_future.ttf" id="2_2nbqm"]
 [ext_resource type="FontFile" uid="uid://cnacftrakk1vh" path="res://assets/font/kenvector_future_thin.ttf" id="3_gg4li"]
 [ext_resource type="Texture2D" uid="uid://bdqhisgoa4exi" path="res://assets/PNG/UI/buttonBlue.png" id="4_13t1f"]
+[ext_resource type="AudioStream" uid="uid://jjuajyda5xk2" path="res://assets/audio/sfx_twoTone.ogg" id="5_tnb2p"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7k2i8"]
 font = ExtResource("2_2nbqm")
@@ -119,6 +120,9 @@ icon_alignment = 1
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_tnb2p")
 
 [connection signal="pressed" from="Upgrade4" to="." method="_on_upgrade_4_pressed"]
 [connection signal="pressed" from="Upgrade3" to="." method="_on_upgrade_3_pressed"]

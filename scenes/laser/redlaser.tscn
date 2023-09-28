@@ -1,14 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://17dcjebirlhe"]
+[gd_scene load_steps=5 format=3 uid="uid://17dcjebirlhe"]
 
-[ext_resource type="Script" path="res://scenes/laser/laser.gd" id="1_ukdxv"]
+[ext_resource type="Script" path="res://scenes/laser/redlaser.gd" id="1_g8wvj"]
 [ext_resource type="Texture2D" uid="uid://cj2c4po1sup5e" path="res://assets/PNG/Lasers/laserRed16.png" id="2_lwtmw"]
+[ext_resource type="AudioStream" uid="uid://cce5202o4jybd" path="res://assets/audio/sfx_laser1.ogg" id="3_jf7gr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wcdff"]
 size = Vector2(8, 44)
 
 [node name="redlaser" type="Area2D" groups=["weapon"]]
 collision_layer = 16
-script = ExtResource("1_ukdxv")
+script = ExtResource("1_g8wvj")
+is_red = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["weapon"]]
 rotation = -3.14154
@@ -21,6 +23,9 @@ shape = SubResource("RectangleShape2D_wcdff")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(0, 9.53674e-07)
 scale = Vector2(1, 2.7)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_jf7gr")
 
 [connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_exited"]

@@ -1,12 +1,13 @@
 extends CanvasLayer
 @onready var title_label = $TitleLabel
+@onready var sub_title = $TitleLabel/SubTitle
 
 func _ready():
 	SignalManager.level_finished.connect(on_level_finished)
 	
 func _process(delta): 
 	if title_label.visible == true:
-		if Input.is_action_just_pressed("Shoot"):
+		if Input.is_action_just_pressed("Enter"):
 			GameManager.on_pause_game()		
 			GameManager.is_final_blitz = false		
 			if GameManager.level == 2:
@@ -21,4 +22,5 @@ func on_level_finished():
 	GameManager.enemy_killed = 0
 	GameManager.level += 1
 	title_label.show()
+	sub_title.show()
 	GameManager.on_pause_game()

@@ -1,7 +1,8 @@
-[gd_scene load_steps=69 format=3 uid="uid://ccjevfme2ltui"]
+[gd_scene load_steps=70 format=3 uid="uid://ccjevfme2ltui"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_2atnk"]
 [ext_resource type="Texture2D" uid="uid://dv7njqfiuw1r5" path="res://assets/PNG/Damage/Explosion/explosion 4.png" id="2_6h33n"]
+[ext_resource type="AudioStream" uid="uid://bl15rty2ndn8l" path="res://assets/audio/explosion.ogg" id="4_eolyo"]
 [ext_resource type="Texture2D" uid="uid://dlb0mfjx60aww" path="res://assets/PNG/playerShip1_blue.png" id="11_nomgw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4nftl"]
@@ -451,6 +452,45 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_iud4o")
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
 }],
 "loop": false,
 "name": &"death",
@@ -486,6 +526,9 @@ animation = &"death"
 autoplay = "idle"
 frame = 62
 frame_progress = 1.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_eolyo")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_shape_entered" from="Area2D" to="." method="_on_area_2d_area_shape_entered"]

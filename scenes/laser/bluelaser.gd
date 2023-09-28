@@ -3,28 +3,23 @@ extends Area2D
 var speed = 10.0
 const POWER = 5
 @onready var animated_sprite_2d = $AnimatedSprite2D
+@onready var audio_stream_player = $AudioStreamPlayer
 
 
-var direction = 1
-var is_player_weapon = false
+var direction = -1
+var is_player_weapon = true
 
 func _physics_process(delta):
 	global_position.y += speed * direction
 
 
 func shoot(gp: Vector2, is_player: bool):
-	is_player_weapon = is_player
-	global_position = gp
-	if is_player_weapon:
-		direction = -1
-	else:
-		direction = 1
-		animated_sprite_2d.flip_v = true
+	global_position = gp	
+	audio_stream_player.play()
 
 
 func _on_screen_exited():
-	if is_player_weapon:
-		SignalManager.combo_reset.emit()
+	SignalManager.combo_reset.emit()
 	queue_free()
 
 
