@@ -11,7 +11,7 @@ func _process(delta):
 			GameManager.on_pause_game()		
 			GameManager.is_final_blitz = false		
 			if GameManager.level == 2:
-				get_tree().change_scene_to_file(LevelManager.level2_scene)
+				get_tree().change_scene_to_file(LevelManager.level3_scene)
 			elif GameManager.level == 3:
 				get_tree().change_scene_to_file(LevelManager.level3_scene)
 	

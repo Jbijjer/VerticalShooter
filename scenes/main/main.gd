@@ -8,3 +8,7 @@ func _input(event):
 
 func start_game():
 	GameManager.new_game()
+
+
+func _on_timer_timeout():
+	$MeteorBrownBig1/AnimationPlayer.play("travel")

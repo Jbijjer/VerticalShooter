@@ -362,6 +362,20 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("3_xv53n")
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"flash",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_xv53n")
 }],
 "loop": true,
 "name": &"idle",
@@ -390,7 +404,7 @@ shape = SubResource("CircleShape2D_ldo44")
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_rcs6f")
-animation = &"idle"
+animation = &"flash"
 autoplay = "idle"
 
 [node name="Timer" type="Timer" parent="."]

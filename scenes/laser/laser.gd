@@ -3,9 +3,6 @@ extends Area2D
 const SPEED = 10.0
 const POWER = 1
 
-@export var is_green: bool
-@export var is_red: bool
-
 var direction = 1
 var is_player_weapon = false
 

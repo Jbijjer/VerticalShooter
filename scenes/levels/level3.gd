@@ -30,22 +30,21 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if level_3_3_limit <= GameManager.enemy_killed and current_sublevel == 3:
-		if get_tree().get_nodes_in_group("enemy").size() <= 0:
-			if is_fighting_boss:
-				return
-			else:
-				SignalManager.boss_fight_start.emit()
-				is_fighting_boss = true
-				start_fight()
+		if is_fighting_boss:
+			move_boss()
+		else:
+			SignalManager.boss_fight_start.emit()
+			$red_boss.is_hidden = false
+			is_fighting_boss = true
+			move_boss()
 			
 	if level_3_3_limit <= GameManager.enemy_killed and current_sublevel == 2:
 		enemy_spawn_timer.stop()
 		var enemies = get_tree().get_nodes_in_group("enemy")
 		for enemy in enemies:
-			if !enemy.global_position.y == -25:
-				SignalManager.flawless_victory.emit()
-				return
-		SignalManager.final_blitz_warning.emit()
+			if enemy.global_position.y == -25:
+				SignalManager.final_blitz_warning.emit()
+				current_sublevel = 3
 		current_sublevel = 3
 				
 	if level_3_2_limit <= GameManager.enemy_killed and current_sublevel == 1:
@@ -126,6 +125,5 @@ func _on_final_blitz_warning_timer_timeout():
 	SignalManager.start_final_blitz.emit() # Replace with function body.
 
 
-func start_fight():
-	if $red_boss.global_position.y >= 235:
-		$red_boss.velocity = Vector2(0, $red_boss.speed)
+func move_boss():
+	$red_boss.move()

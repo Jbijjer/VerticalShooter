@@ -403,7 +403,6 @@ scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_rcs6f")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.54957
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.5
