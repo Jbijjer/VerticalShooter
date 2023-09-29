@@ -18,9 +18,13 @@ func _process(delta):
 	
 	
 func shoot():
-	var l = laser.instantiate() as Area2D
-	get_tree().root.add_child(l)
-	l.shoot(Vector2(global_position.x, global_position.y - 40) , true)
+	print(str($ShootWaitTimer.time_left))
+	if $ShootWaitTimer.time_left <= 0:
+		var l = laser.instantiate() as Area2D
+		get_tree().root.add_child(l)
+		l.shoot($Marker2D.global_position, true)
+		
+		$ShootWaitTimer.start()
 	
 	
 func _physics_process(delta):
@@ -66,22 +70,24 @@ func hit():
 	if PlayerManager.lives <= 0:
 		sprite_2d.play("death")
 		audio_stream_player.play()
-	else:
-		var i = randi_range(1,2)
-		if WeaponManager.level > 1 and PlayerManager.speed_level > 1:
+	elif WeaponManager.level > 1 or PlayerManager.speed_level > 1 or PlayerManager.weapon_speed_level > 1:
+		while true:			
+			var i = randi_range(1,3)
 			if i == 1:
-				WeaponManager.decrease_weapon_power(1)
-				SignalManager.weapon_update.emit()
+				if WeaponManager.level > 1:
+					WeaponManager.decrease_weapon_power(1)
+					SignalManager.weapon_update.emit()
+					break
 			if i == 2:
-				PlayerManager.decrease_max_speed(1)
-				SignalManager.speed_update.emit()
-		elif WeaponManager.level > 1:
-			WeaponManager.decrease_weapon_power(1)
-			SignalManager.weapon_update.emit()
-		elif PlayerManager.speed_level > 1:
-			PlayerManager.decrease_max_speed(1)
-			SignalManager.speed_update.emit()
-			
+				if PlayerManager.speed_level > 1:
+					PlayerManager.decrease_max_speed(1)
+					SignalManager.speed_update.emit()
+					break
+			if i == 3:
+				if PlayerManager.weapon_speed_level > 1:
+					PlayerManager.decrease_max_weapon_speed(1)
+					SignalManager.weapon_speed_update.emit()
+					break
 			
 		
 func die():

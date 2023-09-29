@@ -13,9 +13,9 @@ var enemy1green = preload("res://scenes/enemies/enemy1green.tscn")
 var enemy1red = preload("res://scenes/enemies/enemy1red.tscn")
 var enemy_2_probability = -5
 
-var level_1_1_limit = 15
-var level_1_2_limit = 25
-var level_1_3_limit = 40
+var level_1_1_limit = 5
+var level_1_2_limit = 10
+var level_1_3_limit = 15
 var current_sublevel = 0
 var is_flawless_victory = false
 
@@ -23,6 +23,7 @@ var is_flawless_victory = false
 func _ready():
 	clean_scene()
 	SignalManager.final_blitz_warning.connect(on_final_blitz_warning)
+	$blueportal.play("open")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -32,30 +33,37 @@ func _process(delta):
 		if get_tree().get_nodes_in_group("enemy").size() <= 0:
 			SignalManager.level_finished.emit()
 			if is_flawless_victory:
-				SignalManager.flawless_victory.emit()
-			
+				SignalManager.flawless_victory.emit()			
 	if level_1_3_limit <= GameManager.enemy_killed and current_sublevel == 2:
 		enemy_spawn_timer.stop()
 		var enemies = get_tree().get_nodes_in_group("enemy")
-		for enemy in enemies:
-			if !enemy.global_position.y == -25:
-				is_flawless_victory = true
-				return
 		SignalManager.final_blitz_warning.emit()
-		current_sublevel = 3
-				
+		current_sublevel = 3				
 	if level_1_2_limit <= GameManager.enemy_killed and current_sublevel == 1:
 		GameManager.enemy_spawn_timer_min = 1.0
 		GameManager.enemy_spawn_timer_max = 2.0
 		current_sublevel = 2
-		enemy_2_probability = 70
-		
+		enemy_2_probability = 70		
 	if level_1_1_limit <= GameManager.enemy_killed and current_sublevel == 0:
 		GameManager.enemy_spawn_timer_min = 1.5
 		GameManager.enemy_spawn_timer_max = 3.0
 		current_sublevel = 1
 		enemy_2_probability = 30
+	intro_animation()
 		
+		
+func intro_animation():
+	if $blueportal.get_animation() == "open":
+		if !$blueportal.is_playing():
+			$blueportal.play("idle")
+			$Control/player/AnimationPlayer.play("exit_portal")
+	if $blueportal.get_animation() == "idle":
+		if !$Control/player/AnimationPlayer.is_playing():
+			$blueportal.play("close")
+	if $blueportal.get_animation() == "close":
+		if !$blueportal.is_playing:
+			$blueportal.queue_free()
+			
 
 func _on_enemy_spawn_timer_timeout():
 	if !GameManager.is_final_blitz:
@@ -101,17 +109,17 @@ func clean_scene():
 			
 			
 func on_final_blitz_warning():
-	var enemies_saved = $HBEnemies.get_children()
-	if enemies_saved.is_empty():
+	var enemies_missed = $HBEnemies.get_children()
+	if enemies_missed.is_empty():
 		SignalManager.start_final_blitz.emit()
 	else:
-		for enemy in enemies_saved:
+		for enemy in enemies_missed:
 			enemy.play("flash")
 		$FinalBlitzWarningTimer.start()
 		
 
 func _on_final_blitz_warning_timer_timeout():
-	var enemies_saved = $HBEnemies.get_children()
-	for enemy in enemies_saved:
+	var enemies_missed = $HBEnemies.get_children()
+	for enemy in enemies_missed:
 		enemy.queue_free()
 	SignalManager.start_final_blitz.emit() # Replace with function body.

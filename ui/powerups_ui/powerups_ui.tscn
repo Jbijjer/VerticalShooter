@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bekkhmejx1kpg"]
+[gd_scene load_steps=11 format=3 uid="uid://bekkhmejx1kpg"]
 
 [ext_resource type="Script" path="res://ui/powerups_ui/powerups_ui.gd" id="1_2adak"]
 [ext_resource type="Texture2D" uid="uid://dsr207ai6csoh" path="res://assets/PNG/Power-ups/powerupBlue_star.png" id="2_spdlj"]
 [ext_resource type="FontFile" uid="uid://tel1w5ccqqwi" path="res://assets/font/kenvector_future.ttf" id="3_tem88"]
 [ext_resource type="Texture2D" uid="uid://2q0d53oga4el" path="res://assets/PNG/Power-ups/powerupBlue_bolt.png" id="4_wdutr"]
+[ext_resource type="Texture2D" uid="uid://1rmjospj0fk1" path="res://assets/PNG/Power-ups/powerupBlue_bullets.png" id="5_tevn1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_32ptt"]
 font = ExtResource("3_tem88")
@@ -47,7 +48,7 @@ length = 1.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Speed:visible")
+tracks/0/path = NodePath("../WeaponSpeed:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -59,7 +60,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../Speed:scale")
+tracks/1/path = NodePath("../WeaponSpeed:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -74,11 +75,11 @@ _data = {
 "flash": SubResource("Animation_2g8ow")
 }
 
-[node name="life_ui" type="Node2D"]
+[node name="powerups_ui" type="Node2D"]
 script = ExtResource("1_2adak")
 
 [node name="Weapon" type="Sprite2D" parent="."]
-position = Vector2(86, 20)
+position = Vector2(23, 99)
 texture = ExtResource("2_spdlj")
 
 [node name="Label" type="Label" parent="Weapon"]
@@ -97,13 +98,13 @@ libraries = {
 }
 
 [node name="Speed" type="Sprite2D" parent="."]
-position = Vector2(20.5, 20)
+position = Vector2(22.5, 20)
 texture = ExtResource("4_wdutr")
 
 [node name="Label2" type="Label" parent="Speed"]
-offset_left = 1.5
+offset_left = 0.5
 offset_top = -15.0
-offset_right = 60.5
+offset_right = 59.5
 offset_bottom = 16.0
 text = ": 1"
 label_settings = SubResource("LabelSettings_32ptt")
@@ -111,6 +112,26 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Speed"]
+root_node = NodePath("../../Weapon")
+libraries = {
+"": SubResource("AnimationLibrary_k1wi4")
+}
+
+[node name="WeaponSpeed" type="Sprite2D" parent="."]
+position = Vector2(23, 59)
+texture = ExtResource("5_tevn1")
+
+[node name="Label2" type="Label" parent="WeaponSpeed"]
+offset_left = 0.5
+offset_top = -15.0
+offset_right = 59.5
+offset_bottom = 16.0
+text = ": 1"
+label_settings = SubResource("LabelSettings_32ptt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="WeaponSpeed"]
 root_node = NodePath("../../Weapon")
 libraries = {
 "": SubResource("AnimationLibrary_k1wi4")

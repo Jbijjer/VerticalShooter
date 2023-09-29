@@ -7,6 +7,7 @@ var level = 1
 var enemy_spawn_timer_max = 3.5
 var enemy_spawn_timer_min = 2
 var enemy_killed = 0
+var enemy_missed = 0
 var is_final_blitz = false
 
 
@@ -37,6 +38,7 @@ func new_game():
 	is_game_over = false
 	is_paused = false
 	enemy_killed = 0
+	enemy_missed = 0
 	get_tree().paused = false
 	load_level_1()
 	

@@ -16,8 +16,8 @@ offset_bottom = 94.0
 [node name="life_ui" parent="." instance=ExtResource("2_x567i")]
 position = Vector2(570, 27)
 
-[node name="life_ui2" parent="." instance=ExtResource("3_a3s13")]
-position = Vector2(569, 63)
+[node name="powerups_ui" parent="." instance=ExtResource("3_a3s13")]
+position = Vector2(626, 67)
 
 [node name="score_ui" parent="." instance=ExtResource("4_d0341")]
 offset_left = 16.0

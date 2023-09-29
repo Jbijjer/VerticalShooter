@@ -21,5 +21,6 @@ func on_level_finished():
 	GameManager.enemy_spawn_timer_max = 3.5
 	GameManager.level += 1
 	GameManager.enemy_killed = 0
+	GameManager.enemy_missed = 0
 	show()
 	GameManager.on_pause_game()

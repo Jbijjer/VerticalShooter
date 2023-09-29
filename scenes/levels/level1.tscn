@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://p5qxspebac7p"]
+[gd_scene load_steps=15 format=3 uid="uid://p5qxspebac7p"]
 
 [ext_resource type="Script" path="res://scenes/levels/level1.gd" id="1_kdktg"]
 [ext_resource type="PackedScene" uid="uid://cu1bmcpku7y8" path="res://ui/level_up_ui/level_up_ui.tscn" id="2_i0dyx"]
@@ -11,6 +11,27 @@
 [ext_resource type="PackedScene" uid="uid://dgciyrnwhkn2b" path="res://ui/xp_bar_ui/xp_bar_ui.tscn" id="8_hnkol"]
 [ext_resource type="PackedScene" uid="uid://v018e0knhuyy" path="res://ui/flawless_victory_ui/flawless_victory_ui.tscn" id="8_sv1c7"]
 [ext_resource type="PackedScene" uid="uid://dvvjn5b0g1bjb" path="res://ui/main_ui.tscn" id="10_binmp"]
+[ext_resource type="PackedScene" uid="uid://bo02ac5snisnx" path="res://scenes/portals/blueportal.tscn" id="12_nugor"]
+
+[sub_resource type="Animation" id="Animation_t6vtp"]
+resource_name = "exit_portal"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(345, 197), Vector2(345, 63)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8t7hk"]
+_data = {
+"exit_portal": SubResource("Animation_t6vtp")
+}
 
 [node name="level1" type="Node" groups=["level"]]
 script = ExtResource("1_kdktg")
@@ -30,13 +51,28 @@ script = ExtResource("1_kdktg")
 [node name="final_blitz_warning_ui2" parent="." instance=ExtResource("8_sv1c7")]
 
 [node name="background" parent="." instance=ExtResource("6_6istg")]
-position = Vector2(-22, -58)
+position = Vector2(-5, -60)
 
-[node name="player" parent="." instance=ExtResource("7_hwtqr")]
-position = Vector2(350, 800)
+[node name="Control" type="Control" parent="."]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -12.0
+offset_top = 715.0
+offset_right = 821.0
+offset_bottom = 832.0
+
+[node name="player" parent="Control" instance=ExtResource("7_hwtqr")]
+z_index = 1
+position = Vector2(346, 182)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/player"]
+libraries = {
+"": SubResource("AnimationLibrary_8t7hk")
+}
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 10.0
 autostart = true
 
 [node name="xp_bar_ui" parent="." instance=ExtResource("8_hnkol")]
@@ -75,7 +111,7 @@ position = Vector2(560, 0)
 [node name="EnemySpawner8" type="Marker2D" parent="HBEnemySpawner"]
 position = Vector2(640, 0)
 
-[node name="HBEnemies" type="HBoxContainer" parent="." groups=["enemy_saved_hb"]]
+[node name="HBEnemies" type="HBoxContainer" parent="." groups=["enemy_missed_hb"]]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -89,6 +125,11 @@ theme_override_constants/separation = 20
 
 [node name="FinalBlitzWarningTimer" type="Timer" parent="."]
 wait_time = 1.5
+
+[node name="blueportal" parent="." instance=ExtResource("12_nugor")]
+position = Vector2(327, 837)
+scale = Vector2(4, 4)
+animation = &"idle"
 
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
 [connection signal="timeout" from="FinalBlitzWarningTimer" to="." method="_on_final_blitz_warning_timer_timeout"]

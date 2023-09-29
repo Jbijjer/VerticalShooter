@@ -1,19 +1,19 @@
 [gd_scene load_steps=3 format=3 uid="uid://ckel7t6716o01"]
 
 [ext_resource type="Script" path="res://ui/life_ui/life_ui.gd" id="1_2aot3"]
-[ext_resource type="Texture2D" uid="uid://c3thp6c6afllp" path="res://assets/PNG/UI/playerLife1_blue.png" id="1_m6jue"]
+[ext_resource type="Texture2D" uid="uid://c7gv0a8y7pi4c" path="res://assets/PNG/Player/Nairan - Frigate - Base.png" id="2_q24ai"]
 
 [node name="life_ui" type="Node2D"]
 script = ExtResource("1_2aot3")
 
 [node name="Life1" type="Sprite2D" parent="."]
-position = Vector2(101.5, 20)
-texture = ExtResource("1_m6jue")
+position = Vector2(109, 22)
+texture = ExtResource("2_q24ai")
 
-[node name="Life2" type="Sprite2D" parent="."]
-position = Vector2(61.5, 20)
-texture = ExtResource("1_m6jue")
+[node name="Life1" type="Sprite2D" parent="Life1"]
+position = Vector2(-44.5, 0)
+texture = ExtResource("2_q24ai")
 
-[node name="Life3" type="Sprite2D" parent="."]
-position = Vector2(20.5, 20)
-texture = ExtResource("1_m6jue")
+[node name="Life1" type="Sprite2D" parent="Life1/Life1"]
+position = Vector2(-44, -1)
+texture = ExtResource("2_q24ai")

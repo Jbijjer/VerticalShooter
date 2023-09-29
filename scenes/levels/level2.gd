@@ -39,11 +39,6 @@ func _process(delta):
 			
 	if level_2_3_limit <= GameManager.enemy_killed and current_sublevel == 2:
 		enemy_spawn_timer.stop()
-		var enemies = get_tree().get_nodes_in_group("enemy")
-		for enemy in enemies:
-			if !enemy.global_position.y == -25:
-				is_flawless_victory = true
-				return
 		SignalManager.final_blitz_warning.emit()
 		current_sublevel = 3
 				
@@ -109,18 +104,18 @@ func clean_scene():
 			
 			
 func on_final_blitz_warning():
-	var enemies_saved = $HBEnemies.get_children()
-	if enemies_saved.is_empty():
+	var enemies_missed = $HBEnemies.get_children()
+	if enemies_missed.is_empty():
 		SignalManager.start_final_blitz.emit()
 	else:
-		for enemy in enemies_saved:
+		for enemy in enemies_missed:
 			enemy.play("flash")
 		$FinalBlitzWarningTimer.start()
 		
 
 
 func _on_final_blitz_warning_timer_timeout():
-	var enemies_saved = $HBEnemies.get_children()
-	for enemy in enemies_saved:
+	var enemies_missed = $HBEnemies.get_children()
+	for enemy in enemies_missed:
 		enemy.queue_free()
 	SignalManager.start_final_blitz.emit() # Replace with function body.

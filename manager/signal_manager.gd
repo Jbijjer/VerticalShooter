@@ -15,6 +15,7 @@ signal start_final_blitz()
 signal enemy_explodes()
 signal final_blitz_warning()
 signal flawless_victory()
-signal speed_update
-signal weapon_update
+signal speed_update()
+signal weapon_update()
+signal weapon_speed_update()
 signal boss_fight_start()

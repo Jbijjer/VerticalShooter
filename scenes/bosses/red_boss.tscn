@@ -19,6 +19,7 @@ animations = [{
 }]
 
 [node name="red_boss" type="CharacterBody2D" groups=["enemy"]]
+scale = Vector2(0.9, 0.9)
 script = ExtResource("1_pot5g")
 laser = ExtResource("2_da0b3")
 laser2 = ExtResource("3_53wvw")

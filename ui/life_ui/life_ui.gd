@@ -1,8 +1,8 @@
 extends Node
 
 @onready var life_1 = $Life1
-@onready var life_2 = $Life2
-@onready var life_3 = $Life3
+@onready var life_2 = $Life1/Life1
+@onready var life_3 = $Life1/Life1/Life1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

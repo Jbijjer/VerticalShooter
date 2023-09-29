@@ -73,7 +73,7 @@ position = Vector2(560, 0)
 [node name="EnemySpawner8" type="Marker2D" parent="HBEnemySpawner"]
 position = Vector2(640, 0)
 
-[node name="HBEnemies" type="HBoxContainer" parent="."]
+[node name="HBEnemies" type="HBoxContainer" parent="." groups=["enemy_missed_hb"]]
 offset_right = 40.0
 offset_bottom = 40.0
 

@@ -89,17 +89,20 @@ func shoot(laser: PackedScene, gp: Vector2):
 	
 	
 func exited_screen():
+	global_position.y = -25 - (GameManager.enemy_missed * 125)
 	if(!GameManager.is_final_blitz):
 		is_hidden = true
-		add_enemy_saved_icon()
+		add_enemy_missed_icon()
+
 		
-func add_enemy_saved_icon():	
-	var HBs = get_tree().get_nodes_in_group("enemy_saved_hb")
+func add_enemy_missed_icon():	
+	var HBs = get_tree().get_nodes_in_group("enemy_missed_hb")
 	for hb in HBs:
 		var enemy_sprite = sprite_2d.duplicate() as AnimatedSprite2D
 		enemy_sprite.scale = Vector2(0.4,0.4)
-		enemy_sprite.add_to_group("enemy_saved")			
+		enemy_sprite.add_to_group("enemy_missed")			
 		hb.add_child(enemy_sprite)
+		GameManager.enemy_missed += 1
 		enemy_sprite.position.x = hb.get_child_count() * 25
 	
 	
@@ -128,7 +131,6 @@ func _on_timer_timeout():
 	
 
 func _on_screen_exited():	
-	global_position.y = -25
 	exited_screen()
 
 

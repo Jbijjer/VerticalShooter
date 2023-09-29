@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_vwu45"]
 [ext_resource type="FontFile" uid="uid://du7kehjberimj" path="res://assets/font/Vermin Vibes 1989.ttf" id="2_fedt6"]
 [ext_resource type="Texture2D" uid="uid://xso47rmxkh8q" path="res://assets/PNG/Meteors/meteorBrown_big1.png" id="2_xsfgi"]
-[ext_resource type="Texture2D" uid="uid://dlb0mfjx60aww" path="res://assets/PNG/playerShip1_blue.png" id="3_ab8nl"]
 [ext_resource type="Texture2D" uid="uid://nc48o081ny2k" path="res://assets/PNG/Meteors/meteorBrown_big2.png" id="3_ddh16"]
 [ext_resource type="FontFile" uid="uid://cnacftrakk1vh" path="res://assets/font/kenvector_future_thin.ttf" id="4_cmli4"]
 [ext_resource type="Texture2D" uid="uid://calmel01nx4op" path="res://assets/PNG/Meteors/meteorBrown_big3.png" id="4_k0m87"]
 [ext_resource type="Texture2D" uid="uid://dva2it17gn623" path="res://assets/PNG/Meteors/meteorBrown_big4.png" id="5_1bdfa"]
 [ext_resource type="AudioStream" uid="uid://cu5oct4md1tc7" path="res://assets/audio/space-chillout-14194.mp3" id="5_d4hy0"]
+[ext_resource type="PackedScene" uid="uid://bo02ac5snisnx" path="res://scenes/portals/blueportal.tscn" id="9_jkoki"]
 
 [sub_resource type="Animation" id="Animation_ya0ml"]
 resource_name = "travel"
@@ -241,11 +241,6 @@ libraries = {
 "": SubResource("AnimationLibrary_ug36e")
 }
 
-[node name="PlayerShip1Blue" type="Sprite2D" parent="."]
-position = Vector2(350, 839)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_ab8nl")
-
 [node name="Label" type="Label" parent="."]
 visible = false
 offset_left = 246.0
@@ -264,5 +259,9 @@ autoplay = true
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.229
 autostart = true
+
+[node name="blueportal" parent="." instance=ExtResource("9_jkoki")]
+position = Vector2(350, 860)
+scale = Vector2(4, 4)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

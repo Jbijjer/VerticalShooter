@@ -1,14 +1,21 @@
-[gd_scene load_steps=9 format=3 uid="uid://cu1bmcpku7y8"]
+[gd_scene load_steps=16 format=3 uid="uid://cu1bmcpku7y8"]
 
 [ext_resource type="Script" path="res://ui/level_up_ui/level_up_ui.gd" id="1_bvi5p"]
 [ext_resource type="FontFile" uid="uid://tel1w5ccqqwi" path="res://assets/font/kenvector_future.ttf" id="2_2nbqm"]
-[ext_resource type="FontFile" uid="uid://cnacftrakk1vh" path="res://assets/font/kenvector_future_thin.ttf" id="3_gg4li"]
-[ext_resource type="Texture2D" uid="uid://bdqhisgoa4exi" path="res://assets/PNG/UI/buttonBlue.png" id="4_13t1f"]
+[ext_resource type="Texture2D" uid="uid://bsydy38mqc3o6" path="res://assets/PNG/UI/left_key.png" id="4_tnvro"]
 [ext_resource type="AudioStream" uid="uid://jjuajyda5xk2" path="res://assets/audio/sfx_twoTone.ogg" id="5_tnb2p"]
+[ext_resource type="Texture2D" uid="uid://dy25dr6ver8q5" path="res://assets/PNG/UI/down_key.png" id="5_x5aca"]
+[ext_resource type="Texture2D" uid="uid://bi23fxv65t1bp" path="res://assets/PNG/UI/right_key.png" id="6_5ho3b"]
+[ext_resource type="LabelSettings" uid="uid://cg0lg5n2v7sdw" path="res://label.tres" id="7_glega"]
+[ext_resource type="Texture2D" uid="uid://cal1vpivsi3si" path="res://assets/PNG/UI/up_key.png" id="7_k6p5o"]
+[ext_resource type="Texture2D" uid="uid://1rmjospj0fk1" path="res://assets/PNG/Power-ups/powerupBlue_bullets.png" id="9_jm0ue"]
+[ext_resource type="Texture2D" uid="uid://dsr207ai6csoh" path="res://assets/PNG/Power-ups/powerupBlue_star.png" id="10_imp6g"]
+[ext_resource type="Texture2D" uid="uid://2q0d53oga4el" path="res://assets/PNG/Power-ups/powerupBlue_bolt.png" id="11_vrbq4"]
+[ext_resource type="Texture2D" uid="uid://c3thp6c6afllp" path="res://assets/PNG/UI/playerLife1_blue.png" id="12_1rsmj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7k2i8"]
 font = ExtResource("2_2nbqm")
-font_size = 38
+font_size = 82
 font_color = Color(0.0431373, 1, 1, 1)
 outline_size = 1
 shadow_size = 2
@@ -16,12 +23,23 @@ shadow_color = Color(0.678431, 0.678431, 0.678431, 0.321569)
 
 [sub_resource type="LabelSettings" id="LabelSettings_nyeie"]
 font = ExtResource("2_2nbqm")
+font_size = 37
 font_color = Color(0.0431373, 1, 1, 1)
 outline_size = 1
 shadow_size = 2
 shadow_color = Color(0.678431, 0.678431, 0.678431, 0.321569)
 
-[sub_resource type="Theme" id="Theme_bbn8m"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m3a8x"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.901961, 0.976471, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="level_up_ui" type="CanvasLayer"]
 process_mode = 3
@@ -34,11 +52,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_top = 250
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MC"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 0
 alignment = 1
 
 [node name="TitleLabel" type="Label" parent="MC/VBoxContainer"]
@@ -50,72 +69,10 @@ vertical_alignment = 1
 
 [node name="SubtitleLabel2" type="Label" parent="MC/VBoxContainer"]
 layout_mode = 2
-text = "CHOOSE AN
-UPGRADE"
+text = "CHOOSE AN UPGRADE"
 label_settings = SubResource("LabelSettings_nyeie")
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="DamageUpButton" type="Button" parent="."]
-offset_left = 440.0
-offset_top = 550.0
-offset_right = 670.0
-offset_bottom = 597.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_gg4li")
-text = "Damage ++"
-icon = ExtResource("4_13t1f")
-icon_alignment = 1
-
-[node name="SpeedUpButton" type="Button" parent="."]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -116.0
-offset_top = -277.0
-offset_right = 114.0
-offset_bottom = -230.0
-grow_horizontal = 2
-grow_vertical = 0
-theme = SubResource("Theme_bbn8m")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_gg4li")
-text = "SPEED ++"
-icon = ExtResource("4_13t1f")
-icon_alignment = 1
-
-[node name="LifeUpButton" type="Button" parent="."]
-offset_left = 50.0
-offset_top = 550.0
-offset_right = 280.0
-offset_bottom = 600.0
-theme = SubResource("Theme_bbn8m")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_gg4li")
-theme_override_font_sizes/font_size = 0
-text = "+1 LIFE (MAX 3)"
-icon = ExtResource("4_13t1f")
-icon_alignment = 1
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
@@ -124,6 +81,82 @@ one_shot = true
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_tnb2p")
 
-[connection signal="pressed" from="DamageUpButton" to="." method="_on_upgrade_4_pressed"]
-[connection signal="pressed" from="SpeedUpButton" to="." method="_on_upgrade_3_pressed"]
-[connection signal="pressed" from="LifeUpButton" to="." method="_on_upgrade_1_pressed"]
+[node name="LeftKey" type="Sprite2D" parent="."]
+position = Vector2(304, 599)
+scale = Vector2(4, 4)
+texture = ExtResource("4_tnvro")
+
+[node name="DownKey" type="Sprite2D" parent="."]
+position = Vector2(359, 638)
+scale = Vector2(4, 4)
+texture = ExtResource("5_x5aca")
+
+[node name="RightKey" type="Sprite2D" parent="."]
+position = Vector2(414, 600)
+scale = Vector2(4, 4)
+texture = ExtResource("6_5ho3b")
+
+[node name="UpKey" type="Sprite2D" parent="."]
+position = Vector2(359, 555)
+scale = Vector2(4, 4)
+texture = ExtResource("7_k6p5o")
+
+[node name="LifeUp" type="Label" parent="."]
+offset_left = 94.0
+offset_top = 576.0
+offset_right = 269.0
+offset_bottom = 626.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_m3a8x")
+text = "+1 LIFE"
+label_settings = ExtResource("7_glega")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DamageUp" type="Label" parent="."]
+offset_left = 447.0
+offset_top = 576.0
+offset_right = 622.0
+offset_bottom = 626.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_m3a8x")
+text = "DAMAGE ++"
+label_settings = ExtResource("7_glega")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpeedUp" type="Label" parent="."]
+offset_left = 269.0
+offset_top = 673.0
+offset_right = 444.0
+offset_bottom = 723.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_m3a8x")
+text = "SPEED ++"
+label_settings = ExtResource("7_glega")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FireSpeedUp" type="Label" parent="."]
+offset_left = 269.0
+offset_top = 474.0
+offset_right = 444.0
+offset_bottom = 524.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_m3a8x")
+text = "FIRE SPEED ++"
+label_settings = ExtResource("7_glega")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PowerupBlueBullets" type="Sprite2D" parent="."]
+position = Vector2(354, 453)
+texture = ExtResource("9_jm0ue")
+
+[node name="PowerupBlueStar" type="Sprite2D" parent="."]
+position = Vector2(644, 601)
+texture = ExtResource("10_imp6g")
+
+[node name="PowerupBlueBolt" type="Sprite2D" parent="."]
+position = Vector2(358, 745)
+texture = ExtResource("11_vrbq4")
+
+[node name="PlayerLife1Blue" type="Sprite2D" parent="."]
+position = Vector2(72, 601)
+texture = ExtResource("12_1rsmj")
