@@ -37,19 +37,15 @@ func _on_upgrade_1_pressed():
 	quit_upgrades()
 
 
-#func _on_upgrade_2_pressed():
-#	GameManager.HP = GameManager.MAX_HP
-#	SignalManager.player_heal.emit()
-#	quit_upgrades()
-
-
 func _on_upgrade_3_pressed():
-	PlayerManager.MAX_SPEED += 25
+	PlayerManager.increase_max_speed(1)
+	SignalManager.speed_update.emit()
 	quit_upgrades()
 
 
 func _on_upgrade_4_pressed():
-	WeaponManager.weapon_power += 5
+	WeaponManager.increase_weapon_power(1)
+	SignalManager.weapon_update.emit()
 	quit_upgrades()
 	
 	

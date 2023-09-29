@@ -6,7 +6,7 @@ func _ready():
 	SignalManager.level_finished.connect(on_level_finished)
 	
 func _process(delta): 
-	if title_label.visible == true:
+	if visible == true:
 		if Input.is_action_just_pressed("Enter"):
 			GameManager.on_pause_game()		
 			GameManager.is_final_blitz = false		
@@ -21,6 +21,5 @@ func on_level_finished():
 	GameManager.enemy_spawn_timer_max = 3.5
 	GameManager.enemy_killed = 0
 	GameManager.level += 1
-	title_label.show()
-	sub_title.show()
+	show()
 	GameManager.on_pause_game()

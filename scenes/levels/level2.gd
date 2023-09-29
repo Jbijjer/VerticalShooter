@@ -8,12 +8,10 @@ extends Node
 @onready var enemy_spawner_6 = $HBEnemySpawner/EnemySpawner6
 @onready var enemy_spawner_7 = $HBEnemySpawner/EnemySpawner7
 @onready var enemy_spawner_8 = $HBEnemySpawner/EnemySpawner8
-@onready var score_ui = $MCLabels/HBoxContainer/VBoxContainer/score_ui
-@onready var combo_ui = $MCLabels/HBoxContainer/VBoxContainer/combo_ui
 
-var enemy1green = preload("res://scenes/enemies/enemy1green/enemy1green.tscn")
-var enemy1red = preload("res://scenes/enemies/enemy1red/enemy1red.tscn")
-var enemy2red = preload("res://scenes/enemies/enemy2red/enemy2red.tscn")
+var enemy1green = preload("res://scenes/enemies/enemy1green.tscn")
+var enemy1red = preload("res://scenes/enemies/enemy1red.tscn")
+var enemy2red = preload("res://scenes/enemies/enemy2red.tscn")
 
 var enemy_2_probability = 35
 var enemy_3_probability = -5
@@ -40,8 +38,9 @@ func _process(delta):
 		var enemies = get_tree().get_nodes_in_group("enemy")
 		for enemy in enemies:
 			if !enemy.global_position.y == -25:
+				SignalManager.flawless_victory.emit()
 				return
-		SignalManager.start_final_blitz.emit()
+		SignalManager.final_blitz_warning.emit()
 		current_sublevel = 3
 				
 	if level_2_2_limit <= GameManager.enemy_killed and current_sublevel == 1:
@@ -99,9 +98,25 @@ func spawn_enemy():
 
 func clean_scene():
 	EnemyManager.speed = EnemyManager.MIN_SPEED
-	score_ui.text = str("SCORE : ", ScoreManager.score)
-	combo_ui.text = str("COMBO : ", ComboManager.cur_combo_count)
 	var enemies = get_tree().root.get_children()
 	for e in enemies:
 		if e.is_in_group("enemy"):
 			e.queue_free()
+			
+			
+func on_final_blitz_warning():
+	var enemies_saved = $HBEnemies.get_children()
+	if enemies_saved.is_empty():
+		SignalManager.start_final_blitz.emit()
+	else:
+		for enemy in enemies_saved:
+			enemy.play("flash")
+		$FinalBlitzWarningTimer.start()
+		
+
+
+func _on_final_blitz_warning_timer_timeout():
+	var enemies_saved = $HBEnemies.get_children()
+	for enemy in enemies_saved:
+		enemy.queue_free()
+	SignalManager.start_final_blitz.emit() # Replace with function body.

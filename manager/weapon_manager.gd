@@ -1,11 +1,20 @@
 extends Node
 
-var weapon_power = 5.0
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+var level = 1
+var weapon_power = level * 5.0
 
 
 func reset():
-	weapon_power = 5.0
+	level = 1
+	
+	
+func increase_weapon_power(i: int):
+	level += i
+	weapon_power = level * 5.0
+
+
+func decrease_weapon_power(i: int):
+	if level > 1:
+		level -= i
+		weapon_power = level * 5.0
+		

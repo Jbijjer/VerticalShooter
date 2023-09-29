@@ -43,10 +43,10 @@ func get_input():
 	
 	
 func check_cur_speed():
-	if (PlayerManager.cur_speed + PlayerManager.ACCELERATION_RATE <= PlayerManager.MAX_SPEED):
+	if (PlayerManager.cur_speed + PlayerManager.ACCELERATION_RATE <= PlayerManager.max_speed):
 		PlayerManager.cur_speed += PlayerManager.ACCELERATION_RATE
 	else:
-		PlayerManager.cur_speed = PlayerManager.MAX_SPEED
+		PlayerManager.cur_speed = PlayerManager.max_speed
 		
 		
 func reset_cur_speed():
@@ -62,11 +62,27 @@ func is_out_of_bound():
 func hit():
 	PlayerManager.lives -= 1
 	SignalManager.combo_reset.emit()
-	SignalManager.player_hit.emit()
+	SignalManager.player_hit.emit()	
 	if PlayerManager.lives <= 0:
 		sprite_2d.play("death")
 		audio_stream_player.play()
-		
+	else:
+		var i = randi_range(1,2)
+		if WeaponManager.level > 1 and PlayerManager.speed_level > 1:
+			if i == 1:
+				WeaponManager.decrease_weapon_power(1)
+				SignalManager.weapon_update.emit()
+			if i == 2:
+				PlayerManager.decrease_max_speed(1)
+				SignalManager.speed_update.emit()
+		elif WeaponManager.level > 1:
+			WeaponManager.decrease_weapon_power(1)
+			SignalManager.weapon_update.emit()
+		elif PlayerManager.speed_level > 1:
+			PlayerManager.decrease_max_speed(1)
+			SignalManager.speed_update.emit()
+			
+			
 		
 func die():
 	SignalManager.player_died.emit()

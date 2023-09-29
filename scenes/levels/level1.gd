@@ -9,8 +9,8 @@ extends Node
 @onready var enemy_spawner_7 = $HBEnemySpawner/EnemySpawner7
 @onready var enemy_spawner_8 = $HBEnemySpawner/EnemySpawner8
 
-var enemy1green = preload("res://scenes/enemies/enemy1green/enemy1green.tscn")
-var enemy1red = preload("res://scenes/enemies/enemy1red/enemy1red.tscn")
+var enemy1green = preload("res://scenes/enemies/enemy1green.tscn")
+var enemy1red = preload("res://scenes/enemies/enemy1red.tscn")
 var enemy_2_probability = -5
 
 var level_1_1_limit = 5#15
@@ -21,6 +21,7 @@ var current_sublevel = 0
 
 func _ready():
 	clean_scene()
+	SignalManager.final_blitz_warning.connect(on_final_blitz_warning)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,8 +36,9 @@ func _process(delta):
 		var enemies = get_tree().get_nodes_in_group("enemy")
 		for enemy in enemies:
 			if !enemy.global_position.y == -25:
+				SignalManager.flawless_victory.emit()
 				return
-		SignalManager.start_final_blitz.emit()
+		SignalManager.final_blitz_warning.emit()
 		current_sublevel = 3
 				
 	if level_1_2_limit <= GameManager.enemy_killed and current_sublevel == 1:
@@ -93,3 +95,21 @@ func clean_scene():
 	for e in enemies:
 		if e.is_in_group("enemy"):
 			e.queue_free()
+			
+			
+func on_final_blitz_warning():
+	var enemies_saved = $HBEnemies.get_children()
+	if enemies_saved.is_empty():
+		SignalManager.start_final_blitz.emit()
+	else:
+		for enemy in enemies_saved:
+			enemy.play("flash")
+		$FinalBlitzWarningTimer.start()
+		
+
+
+func _on_final_blitz_warning_timer_timeout():
+	var enemies_saved = $HBEnemies.get_children()
+	for enemy in enemies_saved:
+		enemy.queue_free()
+	SignalManager.start_final_blitz.emit() # Replace with function body.

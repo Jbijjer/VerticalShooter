@@ -13,6 +13,8 @@ var is_dead = false
 @onready var sprite_2d = $Sprite2D
 @onready var timer = $Timer
 @onready var collision_shape_2d_2 = $Area2D/CollisionShape2D2
+@onready var audio_stream_player = $AudioStreamPlayer
+
 
 var speed = EnemyManager.speed
 	
@@ -67,7 +69,12 @@ func hit(power: float, sprite_2d: AnimatedSprite2D):
 			if hp <= 0:
 				speed = 0
 				sprite_2d.play("death")
+				play_explosion_sound()
 				sprite_2d.rotation = randi_range(0,360)
+				
+				
+func play_explosion_sound():
+	audio_stream_player.play()
 				
 				
 func shoot(laser: PackedScene, gp: Vector2):
@@ -84,7 +91,16 @@ func shoot(laser: PackedScene, gp: Vector2):
 func exited_screen():
 	if(!GameManager.is_final_blitz):
 		is_hidden = true
-		SignalManager.enemy_saved.emit()
+		add_enemy_saved_icon()
+		
+func add_enemy_saved_icon():	
+	var HBs = get_tree().get_nodes_in_group("enemy_saved_hb")
+	for hb in HBs:
+		var enemy_sprite = sprite_2d.duplicate() as AnimatedSprite2D
+		enemy_sprite.scale = Vector2(0.4,0.4)
+		enemy_sprite.add_to_group("enemy_saved")			
+		hb.add_child(enemy_sprite)
+		enemy_sprite.position.x = hb.get_child_count() * 25
 	
 	
 func check_if_hit(area: Area2D, sprite_2d: AnimatedSprite2D):

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/laser/redlaser.gd" id="1_g8wvj"]
 [ext_resource type="Texture2D" uid="uid://cj2c4po1sup5e" path="res://assets/PNG/Lasers/laserRed16.png" id="2_lwtmw"]
-[ext_resource type="AudioStream" uid="uid://cce5202o4jybd" path="res://assets/audio/sfx_laser1.ogg" id="3_jf7gr"]
+[ext_resource type="AudioStream" uid="uid://bvbcec06yghh7" path="res://assets/audio/laserSmall_003.ogg" id="3_fbwve"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wcdff"]
 size = Vector2(8, 44)
@@ -25,7 +25,7 @@ position = Vector2(0, 9.53674e-07)
 scale = Vector2(1, 2.7)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_jf7gr")
+stream = ExtResource("3_fbwve")
 
 [connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_exited"]

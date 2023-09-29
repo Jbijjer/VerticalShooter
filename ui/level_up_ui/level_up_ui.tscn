@@ -56,7 +56,7 @@ label_settings = SubResource("LabelSettings_nyeie")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Upgrade4" type="Button" parent="."]
+[node name="DamageUpButton" type="Button" parent="."]
 offset_left = 440.0
 offset_top = 550.0
 offset_right = 670.0
@@ -73,16 +73,16 @@ text = "Damage ++"
 icon = ExtResource("4_13t1f")
 icon_alignment = 1
 
-[node name="Upgrade3" type="Button" parent="."]
+[node name="SpeedUpButton" type="Button" parent="."]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -115.0
-offset_top = -341.0
-offset_right = 115.0
-offset_bottom = -294.0
+offset_left = -116.0
+offset_top = -277.0
+offset_right = 114.0
+offset_bottom = -230.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = SubResource("Theme_bbn8m")
@@ -94,11 +94,11 @@ theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_gg4li")
-text = "points growth ++"
+text = "SPEED ++"
 icon = ExtResource("4_13t1f")
 icon_alignment = 1
 
-[node name="Upgrade1" type="Button" parent="."]
+[node name="LifeUpButton" type="Button" parent="."]
 offset_left = 50.0
 offset_top = 550.0
 offset_right = 280.0
@@ -113,17 +113,17 @@ theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_gg4li")
 theme_override_font_sizes/font_size = 0
-text = "Health Max +"
+text = "+1 LIFE (MAX 3)"
 icon = ExtResource("4_13t1f")
 icon_alignment = 1
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.3
+wait_time = 0.5
 one_shot = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_tnb2p")
 
-[connection signal="pressed" from="Upgrade4" to="." method="_on_upgrade_4_pressed"]
-[connection signal="pressed" from="Upgrade3" to="." method="_on_upgrade_3_pressed"]
-[connection signal="pressed" from="Upgrade1" to="." method="_on_upgrade_1_pressed"]
+[connection signal="pressed" from="DamageUpButton" to="." method="_on_upgrade_4_pressed"]
+[connection signal="pressed" from="SpeedUpButton" to="." method="_on_upgrade_3_pressed"]
+[connection signal="pressed" from="LifeUpButton" to="." method="_on_upgrade_1_pressed"]

@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://elqqjnku0tdp"]
+
+[ext_resource type="FontFile" uid="uid://cnacftrakk1vh" path="res://assets/font/kenvector_future_thin.ttf" id="1_1b3iy"]
+[ext_resource type="Script" path="res://ui/final_blitz_warning_ui/final_blitz_warning_ui.gd" id="1_jksgp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1nfyu"]
+font = ExtResource("1_1b3iy")
+font_size = 39
+font_color = Color(1, 0.211765, 0.0352941, 1)
+
+[sub_resource type="Animation" id="Animation_li7ds"]
+resource_name = "flash"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uldxn"]
+_data = {
+"flash": SubResource("Animation_li7ds")
+}
+
+[node name="final_blitz_warning_ui" type="CanvasLayer"]
+visible = false
+script = ExtResource("1_jksgp")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 129.0
+offset_top = 446.0
+offset_right = 605.0
+offset_bottom = 494.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "FINAL BLITZ INCOMING!
+"
+label_settings = SubResource("LabelSettings_1nfyu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Label"]
+libraries = {
+"": SubResource("AnimationLibrary_uldxn")
+}
