@@ -16,14 +16,16 @@ var enemy2red = preload("res://scenes/enemies/enemy2red.tscn")
 var enemy_2_probability = 35
 var enemy_3_probability = -5
 
-var level_2_1_limit = 5#20
-var level_2_2_limit = 10#40
-var level_2_3_limit = 15#65
+var level_2_1_limit = 15
+var level_2_2_limit = 25
+var level_2_3_limit = 45
 var current_sublevel = 0
+var is_flawless_victory = false
 
 
 func _ready():
 	clean_scene()
+	SignalManager.final_blitz_warning.connect(on_final_blitz_warning)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -32,13 +34,15 @@ func _process(delta):
 		print(str(get_tree().get_nodes_in_group("enemy").size()))
 		if get_tree().get_nodes_in_group("enemy").size() <= 0:
 			SignalManager.level_finished.emit()
+			if is_flawless_victory:
+				SignalManager.flawless_victory.emit()
 			
 	if level_2_3_limit <= GameManager.enemy_killed and current_sublevel == 2:
 		enemy_spawn_timer.stop()
 		var enemies = get_tree().get_nodes_in_group("enemy")
 		for enemy in enemies:
 			if !enemy.global_position.y == -25:
-				SignalManager.flawless_victory.emit()
+				is_flawless_victory = true
 				return
 		SignalManager.final_blitz_warning.emit()
 		current_sublevel = 3

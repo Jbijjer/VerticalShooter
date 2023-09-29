@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dx6qdr3clgtae"]
+[gd_scene load_steps=8 format=3 uid="uid://dx6qdr3clgtae"]
 
 [ext_resource type="Texture2D" uid="uid://plateyq56h8u" path="res://assets/PNG/Bosses/red_motership.png" id="1_clui4"]
 [ext_resource type="Script" path="res://scenes/bosses/red_boss.gd" id="1_pot5g"]
 [ext_resource type="PackedScene" uid="uid://17dcjebirlhe" path="res://scenes/laser/redlaser.tscn" id="2_da0b3"]
+[ext_resource type="PackedScene" uid="uid://prabt1d2mxff" path="res://scenes/laser/roundredlaser.tscn" id="3_53wvw"]
 [ext_resource type="AudioStream" uid="uid://bl15rty2ndn8l" path="res://assets/audio/explosion.ogg" id="3_ttxk0"]
 [ext_resource type="AudioStream" uid="uid://b6mitanwpmej2" path="res://assets/audio/space-120280.mp3" id="5_0ntvo"]
 
@@ -17,16 +18,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ivcwe"]
-radius = 415.54
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_7ngiq"]
-radius = 166.012
-
-[node name="red_boss" type="CharacterBody2D"]
+[node name="red_boss" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_pot5g")
 laser = ExtResource("2_da0b3")
-hp = 500
+laser2 = ExtResource("3_53wvw")
+hp = 1000
 points = 1000
 direction_x = 1
 
@@ -36,19 +32,15 @@ sprite_frames = SubResource("SpriteFrames_ykl06")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["enemy"]]
-scale = Vector2(0.4, 0.4)
-shape = SubResource("CircleShape2D_ivcwe")
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ttxk0")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["enemy"]]
 collision_layer = 19
 collision_mask = 19
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_7ngiq")
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(126, -114, 137, -103, 137, -60, 146, -57, 163, 29, 159, 56, 139, 76, 96, 80, 61, 51, 43, 51, 41, 155, 32, 167, -28, 168, -46, 157, -45, 49, -67, 51, -88, 80, -144, 75, -167, 49, -170, -6, -140, -66, -137, -109, -86, -118, -21, -117, -16, -123, 9, -125, 18, -114)
 
 [node name="Laser1" type="Marker2D" parent="."]
 position = Vector2(-117, 77)
@@ -61,9 +53,16 @@ position = Vector2(116, 80)
 
 [node name="Boss_Song" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_0ntvo")
+volume_db = -8.0
 
-[node name="Timer" type="Timer" parent="."]
+[node name="CenterLaserTimer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
+[node name="SideLaserTimer" type="Timer" parent="."]
+wait_time = 0.75
 autostart = true
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="CenterLaserTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="SideLaserTimer" to="." method="_on_side_laser_timer_timeout"]

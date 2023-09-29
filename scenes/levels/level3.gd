@@ -22,9 +22,11 @@ var level_3_2_limit = 10#40
 var level_3_3_limit = 15#65
 var current_sublevel = 0
 var is_fighting_boss : bool = false
+var is_screen_shaken : bool = false
 
 func _ready():
-	clean_scene()
+	clean_scene()	
+	SignalManager.final_blitz_warning.connect(on_final_blitz_warning)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -34,6 +36,8 @@ func _process(delta):
 			move_boss()
 		else:
 			SignalManager.boss_fight_start.emit()
+			is_screen_shaken = true
+			$ScreenShakeTimer.start()
 			$red_boss.is_hidden = false
 			is_fighting_boss = true
 			move_boss()
@@ -60,6 +64,9 @@ func _process(delta):
 		current_sublevel = 1
 		enemy_2_probability = 60
 		enemy_3_probability = 30
+		
+	if is_screen_shaken:
+		shake(3)
 		
 
 func _on_enemy_spawn_timer_timeout():
@@ -127,3 +134,14 @@ func _on_final_blitz_warning_timer_timeout():
 
 func move_boss():
 	$red_boss.move()
+	
+	
+func shake(shake_amount : float):
+	$Camera2D.set_offset(Vector2( \
+		randf_range(-1.0, 1.0) * shake_amount, \
+		randf_range(-1.0, 1.0) * shake_amount \
+	))
+
+
+func _on_screen_shake_timer_timeout():
+	is_screen_shaken = false

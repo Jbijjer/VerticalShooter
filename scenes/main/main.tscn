@@ -132,9 +132,6 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 0
 shadow_color = Color(0.976471, 0.976471, 0.988235, 0)
 
-[sub_resource type="Animation" id="Animation_6nsjg"]
-resource_name = "flash"
-
 [sub_resource type="Animation" id="Animation_flivs"]
 resource_name = "arrives"
 length = 1.5
@@ -162,6 +159,9 @@ tracks/1/keys = {
 "update": 1,
 "values": [false, true]
 }
+
+[sub_resource type="Animation" id="Animation_6nsjg"]
+resource_name = "flash"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ug36e"]
 _data = {
@@ -258,6 +258,7 @@ label_settings = SubResource("LabelSettings_4y5ma")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_d4hy0")
+volume_db = -8.0
 autoplay = true
 
 [node name="Timer" type="Timer" parent="."]

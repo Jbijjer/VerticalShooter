@@ -10,7 +10,6 @@ size = Vector2(8, 44)
 [node name="redlaser" type="Area2D" groups=["weapon"]]
 collision_layer = 16
 script = ExtResource("1_g8wvj")
-is_red = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["weapon"]]
 rotation = -3.14154

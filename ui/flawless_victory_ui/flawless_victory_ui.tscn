@@ -9,6 +9,7 @@ font_size = 39
 font_color = Color(0.164706, 0.6, 0.831373, 1)
 
 [node name="final_blitz_warning_ui" type="CanvasLayer"]
+visible = false
 script = ExtResource("1_i5l5u")
 
 [node name="Label" type="Label" parent="."]

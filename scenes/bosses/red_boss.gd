@@ -9,6 +9,7 @@ var is_hidden = true
 var is_dead = false
 
 @export var laser = PackedScene
+@export var laser2 = PackedScene
 @export var hp: int
 @export var points: int
 @export var direction_x: int
@@ -67,22 +68,27 @@ func shoot(l: PackedScene, gp):
 
 
 func _on_area_entered(area):
-	if hp > 0:
-		if area.is_in_group("weapon"):
-			if (area.is_player_weapon):
-				hit(WeaponManager.weapon_power, animated_sprite_2d)
+	if global_position.y >= 235:
+		if hp > 0:
+			if area.is_in_group("weapon"):
+				if (area.is_player_weapon):
+					hit(WeaponManager.weapon_power, animated_sprite_2d)
 
 
 func _on_timer_timeout():
+	if !is_hidden:
+		l2 = shoot(laser2, $Laser2.global_position)
+		if l2 != null:
+			get_tree().root.add_child(l2)
+			l2.play()
+
+
+func _on_side_laser_timer_timeout():	
 	if !is_hidden:
 		l1 = shoot(laser, $Laser1.global_position)
 		if l1 != null:
 			get_tree().root.add_child(l1)
 			l1.play()
-		l2 = shoot(laser, $Laser2.global_position)
-		if l2 != null:
-			get_tree().root.add_child(l2)
-			l2.play()
 		l3 = shoot(laser, $Laser3.global_position)
 		if l3 != null:
 			get_tree().root.add_child(l3)

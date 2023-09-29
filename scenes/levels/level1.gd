@@ -13,10 +13,11 @@ var enemy1green = preload("res://scenes/enemies/enemy1green.tscn")
 var enemy1red = preload("res://scenes/enemies/enemy1red.tscn")
 var enemy_2_probability = -5
 
-var level_1_1_limit = 5#15
-var level_1_2_limit = 10#30
-var level_1_3_limit = 15#45
+var level_1_1_limit = 15
+var level_1_2_limit = 25
+var level_1_3_limit = 40
 var current_sublevel = 0
+var is_flawless_victory = false
 
 
 func _ready():
@@ -30,13 +31,15 @@ func _process(delta):
 		print(str(get_tree().get_nodes_in_group("enemy").size()))
 		if get_tree().get_nodes_in_group("enemy").size() <= 0:
 			SignalManager.level_finished.emit()
+			if is_flawless_victory:
+				SignalManager.flawless_victory.emit()
 			
 	if level_1_3_limit <= GameManager.enemy_killed and current_sublevel == 2:
 		enemy_spawn_timer.stop()
 		var enemies = get_tree().get_nodes_in_group("enemy")
 		for enemy in enemies:
 			if !enemy.global_position.y == -25:
-				SignalManager.flawless_victory.emit()
+				is_flawless_victory = true
 				return
 		SignalManager.final_blitz_warning.emit()
 		current_sublevel = 3
@@ -106,7 +109,6 @@ func on_final_blitz_warning():
 			enemy.play("flash")
 		$FinalBlitzWarningTimer.start()
 		
-
 
 func _on_final_blitz_warning_timer_timeout():
 	var enemies_saved = $HBEnemies.get_children()
