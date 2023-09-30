@@ -58,8 +58,9 @@ func update_interface():
 	
 		
 func final_blitz():
-	speed = EnemyManager.max_speed
-	is_hidden = false
+	if is_in_group("enemy_missed"):
+		speed = EnemyManager.max_speed
+		is_hidden = false
 
 
 func hit(power: float, sprite_2d: AnimatedSprite2D):
@@ -100,7 +101,6 @@ func add_enemy_missed_icon():
 	for hb in HBs:
 		var enemy_sprite = sprite_2d.duplicate() as AnimatedSprite2D
 		enemy_sprite.scale = Vector2(0.4,0.4)
-		enemy_sprite.add_to_group("enemy_missed")			
 		hb.add_child(enemy_sprite)
 		GameManager.enemy_missed += 1
 		enemy_sprite.position.x = hb.get_child_count() * 25

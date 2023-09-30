@@ -31,7 +31,6 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if level_2_3_limit <= GameManager.enemy_killed and current_sublevel == 3:
-		print(str(get_tree().get_nodes_in_group("enemy").size()))
 		if get_tree().get_nodes_in_group("enemy").size() <= 0:
 			SignalManager.level_finished.emit()
 			if is_flawless_victory:

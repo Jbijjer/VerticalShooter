@@ -35,10 +35,15 @@ func _process(delta):
 			if is_flawless_victory:
 				SignalManager.flawless_victory.emit()			
 	if level_1_3_limit <= GameManager.enemy_killed and current_sublevel == 2:
-		enemy_spawn_timer.stop()
+		enemy_spawn_timer.stop()	
 		var enemies = get_tree().get_nodes_in_group("enemy")
-		SignalManager.final_blitz_warning.emit()
-		current_sublevel = 3				
+		if enemies.size > 0:
+			for enemy in enemies:
+				if enemy.global_position.x <= -25:				
+					SignalManager.final_blitz_warning.emit()
+					current_sublevel = 3		
+					break
+		current_sublevel = 3		
 	if level_1_2_limit <= GameManager.enemy_killed and current_sublevel == 1:
 		GameManager.enemy_spawn_timer_min = 1.0
 		GameManager.enemy_spawn_timer_max = 2.0
@@ -99,6 +104,7 @@ func spawn_enemy():
 			e.global_position = enemy_spawner_8.global_position
 			
 	enemy_spawn_timer.wait_time = randf_range(GameManager.enemy_spawn_timer_min, GameManager.enemy_spawn_timer_max)
+	enemy_spawn_timer.start()
 	
 
 func clean_scene():

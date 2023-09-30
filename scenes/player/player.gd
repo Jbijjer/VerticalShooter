@@ -6,6 +6,8 @@ extends CharacterBody2D
 @export var laser = preload("res://scenes/laser/bluelaser.tscn")
 @onready var audio_stream_player = $AudioStreamPlayer
 
+var is_dying = false
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -18,7 +20,6 @@ func _process(delta):
 	
 	
 func shoot():
-	print(str($ShootWaitTimer.time_left))
 	if $ShootWaitTimer.time_left <= 0:
 		var l = laser.instantiate() as Area2D
 		get_tree().root.add_child(l)
@@ -68,8 +69,11 @@ func hit():
 	SignalManager.combo_reset.emit()
 	SignalManager.player_hit.emit()	
 	if PlayerManager.lives <= 0:
-		sprite_2d.play("death")
-		audio_stream_player.play()
+		if !is_dying:
+			is_dying = true
+			sprite_2d.play("death")
+			$EngineSprite.queue_free()
+			audio_stream_player.play()
 	elif WeaponManager.level > 1 or PlayerManager.speed_level > 1 or PlayerManager.weapon_speed_level > 1:
 		while true:			
 			var i = randi_range(1,3)

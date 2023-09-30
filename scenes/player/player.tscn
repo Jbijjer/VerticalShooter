@@ -207,10 +207,8 @@ script = ExtResource("1_2atnk")
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_bcaif")
-animation = &"death"
+animation = &"idle"
 autoplay = "idle"
-frame = 15
-frame_progress = 1.0
 
 [node name="EngineSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 8)

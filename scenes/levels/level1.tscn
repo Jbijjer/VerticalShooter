@@ -72,7 +72,8 @@ libraries = {
 }
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 6.0
+one_shot = true
 autostart = true
 
 [node name="xp_bar_ui" parent="." instance=ExtResource("8_hnkol")]
