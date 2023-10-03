@@ -1,16 +1,16 @@
 [gd_scene load_steps=6 format=3 uid="uid://brrdps6u3goyu"]
 
 [ext_resource type="Script" path="res://ui/level_completed_ui/level_completed_ui.gd" id="1_uc5cw"]
-[ext_resource type="FontFile" uid="uid://tel1w5ccqqwi" path="res://assets/font/kenvector_future.ttf" id="2_2gog1"]
-[ext_resource type="FontFile" uid="uid://cnacftrakk1vh" path="res://assets/font/kenvector_future_thin.ttf" id="3_ffwno"]
+[ext_resource type="FontFile" uid="uid://by2q5kt44784k" path="res://assets/font/Minecraftia-Regular.ttf" id="2_i13xp"]
+[ext_resource type="PackedScene" uid="uid://bj7g2x35tw2fe" path="res://scenes/cutscenes/game_over.tscn" id="3_28una"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_43ygm"]
-font = ExtResource("2_2gog1")
+font = ExtResource("2_i13xp")
 font_size = 51
 font_color = Color(0, 0.501961, 0.686275, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ebirs"]
-font = ExtResource("3_ffwno")
+font = ExtResource("2_i13xp")
 font_size = 30
 font_color = Color(0, 0.5, 0.683594, 1)
 
@@ -48,3 +48,5 @@ text = "PRESS ENTER TO CONTINUE"
 label_settings = SubResource("LabelSettings_ebirs")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TextGameOver" parent="." instance=ExtResource("3_28una")]

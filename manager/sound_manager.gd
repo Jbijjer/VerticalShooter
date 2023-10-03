@@ -1,13 +1,11 @@
 extends Node
 
-@onready var enemylaser = "res://assets/audio/sfx_laser2.ogg"
+@onready var intro_music = $IntroMusic
 
-func play_enemylaser_sound():
-	var audio = AudioStreamPlayer.new()
-	if FileAccess.file_exists(enemylaser):
-		var sfx = load(enemylaser) 
-		sfx.set_loop(false)
-		audio.stream = sfx
-		audio.play()
+func play_intro_music():
+	intro_music.play()
+
+func stop_intro_music():
+	intro_music.stop()
 	
 	

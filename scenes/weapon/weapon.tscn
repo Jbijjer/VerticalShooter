@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://cs3aqepv5vgmw"]
+
+[ext_resource type="Texture2D" uid="uid://bcggw2ct8p7p5" path="res://assets/PNG/Lasers/Nairan - Rocket.png" id="1_4o7ro"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k46eq"]
+atlas = ExtResource("1_4o7ro")
+region = Rect2(0, 0, 9, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkork"]
+atlas = ExtResource("1_4o7ro")
+region = Rect2(9, 0, 9, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2eeb7"]
+atlas = ExtResource("1_4o7ro")
+region = Rect2(18, 0, 9, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xyrb"]
+atlas = ExtResource("1_4o7ro")
+region = Rect2(27, 0, 9, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rd6t1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k46eq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qkork")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2eeb7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xyrb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="weapon" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_rd6t1")

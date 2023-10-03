@@ -1,0 +1,200 @@
+[gd_scene load_steps=9 format=3 uid="uid://docfiba57s6as"]
+
+[ext_resource type="Script" path="res://scenes/cutscenes/intro.gd" id="1_mb0u8"]
+[ext_resource type="StyleBox" uid="uid://x0qy5wmkigfg" path="res://cutscene_interceptor_label.tres" id="1_ycnxs"]
+[ext_resource type="LabelSettings" uid="uid://cg0lg5n2v7sdw" path="res://label.tres" id="2_dv3py"]
+[ext_resource type="Texture2D" uid="uid://dnshcc0ylsfnn" path="res://assets/PNG/Portraits/the_interceptor.png" id="4_cmn0i"]
+[ext_resource type="StyleBox" uid="uid://cia5bump23i7l" path="res://cutscene_jack_rift_label.tres" id="4_kmghv"]
+[ext_resource type="Texture2D" uid="uid://d0vddv4mgf1ph" path="res://assets/PNG/Portraits/jack_rift.png" id="6_kxmbe"]
+
+[sub_resource type="Animation" id="Animation_8b64e"]
+resource_name = "cutscene"
+length = 12.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Label1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Label1:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/Label2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(3.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/Label2:visible_ratio")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(3.1, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CanvasLayer/Label3:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(6.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CanvasLayer/Label3:visible_ratio")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(6.1, 9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("CanvasLayer/Label4:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(9.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("CanvasLayer/Label4:visible_ratio")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(9.1, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fx1a7"]
+_data = {
+"cutscene": SubResource("Animation_8b64e")
+}
+
+[node name="intro" type="Node"]
+script = ExtResource("1_mb0u8")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label1" type="Label" parent="CanvasLayer"]
+visible = false
+offset_left = 23.0
+offset_top = 45.0
+offset_right = 557.0
+offset_bottom = 231.0
+theme_override_styles/normal = ExtResource("1_ycnxs")
+text = "              
+                                      THE INTERCEPTOR :
+                                       Prisoner escaped! 
+                                       He fled with portal technology!
+                                       Bring him back alive!          
+"
+label_settings = ExtResource("2_dv3py")
+
+[node name="MageLady" type="Sprite2D" parent="CanvasLayer/Label1"]
+position = Vector2(92, 92)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_cmn0i")
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+visible = false
+offset_left = 127.0
+offset_top = 260.0
+offset_right = 690.0
+offset_bottom = 446.0
+theme_override_styles/normal = ExtResource("4_kmghv")
+text = "              
+     JACK RIFT :
+     You'll never get me.
+     You and your minions are like ants to me.
+     I'm bringing your technology to earth."
+label_settings = ExtResource("2_dv3py")
+
+[node name="PalMan" type="Sprite2D" parent="CanvasLayer/Label2"]
+position = Vector2(468, 93)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("6_kxmbe")
+
+[node name="Label3" type="Label" parent="CanvasLayer"]
+visible = false
+offset_left = 29.0
+offset_top = 478.0
+offset_right = 563.0
+offset_bottom = 664.0
+theme_override_styles/normal = ExtResource("1_ycnxs")
+text = "              
+                                      THE INTERCEPTOR :
+                                      Stupid human. You know nothing about
+                                      the portals.
+                                      "
+label_settings = ExtResource("2_dv3py")
+
+[node name="MageLady" type="Sprite2D" parent="CanvasLayer/Label3"]
+position = Vector2(92, 92)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_cmn0i")
+
+[node name="Label4" type="Label" parent="CanvasLayer"]
+visible = false
+offset_left = 125.0
+offset_top = 687.0
+offset_right = 688.0
+offset_bottom = 873.0
+theme_override_styles/normal = ExtResource("4_kmghv")
+text = "              
+     JACK RIFT :
+     Well I know one thing :
+     You'll never get it back!
+     So long suckers!"
+label_settings = ExtResource("2_dv3py")
+
+[node name="PalMan" type="Sprite2D" parent="CanvasLayer/Label4"]
+position = Vector2(468, 93)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("6_kxmbe")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fx1a7")
+}

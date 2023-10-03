@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cu1bmcpku7y8"]
+[gd_scene load_steps=12 format=3 uid="uid://cu1bmcpku7y8"]
 
 [ext_resource type="Script" path="res://ui/level_up_ui/level_up_ui.gd" id="1_bvi5p"]
 [ext_resource type="FontFile" uid="uid://tel1w5ccqqwi" path="res://assets/font/kenvector_future.ttf" id="2_2nbqm"]
@@ -8,10 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://bi23fxv65t1bp" path="res://assets/PNG/UI/right_key.png" id="6_5ho3b"]
 [ext_resource type="LabelSettings" uid="uid://cg0lg5n2v7sdw" path="res://label.tres" id="7_glega"]
 [ext_resource type="Texture2D" uid="uid://cal1vpivsi3si" path="res://assets/PNG/UI/up_key.png" id="7_k6p5o"]
-[ext_resource type="Texture2D" uid="uid://1rmjospj0fk1" path="res://assets/PNG/Power-ups/powerupBlue_bullets.png" id="9_jm0ue"]
-[ext_resource type="Texture2D" uid="uid://dsr207ai6csoh" path="res://assets/PNG/Power-ups/powerupBlue_star.png" id="10_imp6g"]
-[ext_resource type="Texture2D" uid="uid://2q0d53oga4el" path="res://assets/PNG/Power-ups/powerupBlue_bolt.png" id="11_vrbq4"]
-[ext_resource type="Texture2D" uid="uid://c3thp6c6afllp" path="res://assets/PNG/UI/playerLife1_blue.png" id="12_1rsmj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7k2i8"]
 font = ExtResource("2_2nbqm")
@@ -144,19 +140,3 @@ text = "FIRE SPEED ++"
 label_settings = ExtResource("7_glega")
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="PowerupBlueBullets" type="Sprite2D" parent="."]
-position = Vector2(354, 453)
-texture = ExtResource("9_jm0ue")
-
-[node name="PowerupBlueStar" type="Sprite2D" parent="."]
-position = Vector2(644, 601)
-texture = ExtResource("10_imp6g")
-
-[node name="PowerupBlueBolt" type="Sprite2D" parent="."]
-position = Vector2(358, 745)
-texture = ExtResource("11_vrbq4")
-
-[node name="PlayerLife1Blue" type="Sprite2D" parent="."]
-position = Vector2(72, 601)
-texture = ExtResource("12_1rsmj")

@@ -8,8 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://cgxyj8f7wq5dx" path="res://scenes/background/background.tscn" id="6_x6fg5"]
 [ext_resource type="PackedScene" uid="uid://elqqjnku0tdp" path="res://ui/final_blitz_warning_ui/final_blitz_warning_ui.tscn" id="7_87ajm"]
 [ext_resource type="PackedScene" uid="uid://ccjevfme2ltui" path="res://scenes/player/player.tscn" id="7_k6owd"]
-[ext_resource type="PackedScene" uid="uid://dgciyrnwhkn2b" path="res://ui/xp_bar_ui/xp_bar_ui.tscn" id="8_lex0g"]
 [ext_resource type="PackedScene" uid="uid://dvvjn5b0g1bjb" path="res://ui/main_ui.tscn" id="9_8rgci"]
+[ext_resource type="AudioStream" uid="uid://dn15ec06aq73c" path="res://assets/audio/FinalBlitzMusic.wav" id="10_mcu7h"]
 
 [node name="level2" type="Node"]
 script = ExtResource("1_w5cgh")
@@ -35,9 +35,6 @@ position = Vector2(350, 800)
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
-
-[node name="xp_bar_ui" parent="." instance=ExtResource("8_lex0g")]
-z_index = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(360, 450)
@@ -73,10 +70,17 @@ position = Vector2(560, 0)
 position = Vector2(640, 0)
 
 [node name="HBEnemies" type="HBoxContainer" parent="." groups=["enemy_missed_hb"]]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 1.0
+offset_top = 841.0
+offset_right = 720.0
+offset_bottom = 899.0
 
 [node name="FinalBlitzWarningTimer" type="Timer" parent="."]
 wait_time = 1.5
+one_shot = true
+
+[node name="FinalBlitzMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_mcu7h")
 
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
+[connection signal="timeout" from="FinalBlitzWarningTimer" to="." method="_on_final_blitz_warning_timer_timeout"]

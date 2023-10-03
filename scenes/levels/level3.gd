@@ -14,12 +14,12 @@ var enemy1green = preload("res://scenes/enemies/enemy1green.tscn")
 var enemy2green = preload("res://scenes/enemies/enemy2green.tscn")
 var enemy2red = preload("res://scenes/enemies/enemy2red.tscn")
 
-var enemy_2_probability = 55
+var enemy_2_probability = 30
 var enemy_3_probability = 10
 
-var level_3_1_limit = 5#20
-var level_3_2_limit = 10#40
-var level_3_3_limit = 15#65
+var level_1_limit = 5#20
+var level_2_limit = 10#40
+var level_3_limit = 15#65
 var current_sublevel = 0
 var is_fighting_boss : bool = false
 var is_screen_shaken : bool = false
@@ -27,41 +27,52 @@ var is_screen_shaken : bool = false
 func _ready():
 	clean_scene()	
 	SignalManager.final_blitz_warning.connect(on_final_blitz_warning)
+	update_ui()
+			
+			
+func update_ui():
+	SignalManager.speed_update.emit(false)
+	SignalManager.score_updated.emit(0)
+	SignalManager.weapon_speed_update.emit(false)
+	SignalManager.weapon_update.emit(false)
+	SignalManager.combo_update.emit()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if level_3_3_limit <= GameManager.enemy_killed and current_sublevel == 3:
+	verify_progress()
+		
+	if is_screen_shaken:
+		shake(3)
+		
+		
+func verify_progress():
+	if level_3_limit <= GameManager.enemy_killed and current_sublevel == 3:
 		if is_fighting_boss:
 			move_boss()
 		else:
+			GameManager.is_final_blitz = true
 			SignalManager.boss_fight_start.emit()
 			is_screen_shaken = true
 			$ScreenShakeTimer.start()
 			$red_boss.is_hidden = false
 			is_fighting_boss = true
-			move_boss()
-			
-	if level_3_3_limit <= GameManager.enemy_killed and current_sublevel == 2:
+			move_boss()			
+	if level_3_limit <= GameManager.enemy_killed and current_sublevel == 2:
 		enemy_spawn_timer.stop()
-		current_sublevel = 3
-				
-	if level_3_2_limit <= GameManager.enemy_killed and current_sublevel == 1:
+		current_sublevel = 3				
+	if level_2_limit <= GameManager.enemy_killed and current_sublevel == 1:
 		GameManager.enemy_spawn_timer_min = 1.0
 		GameManager.enemy_spawn_timer_max = 2.0
 		current_sublevel = 2
-		enemy_2_probability = 80
-		enemy_3_probability = 50
-		
-	if level_3_1_limit <= GameManager.enemy_killed and current_sublevel == 0:
+		enemy_2_probability = 70
+		enemy_3_probability = 40		
+	if level_1_limit <= GameManager.enemy_killed and current_sublevel == 0:
 		GameManager.enemy_spawn_timer_min = 1.5
 		GameManager.enemy_spawn_timer_max = 3.0
 		current_sublevel = 1
 		enemy_2_probability = 60
 		enemy_3_probability = 30
-		
-	if is_screen_shaken:
-		shake(3)
 		
 
 func _on_enemy_spawn_timer_timeout():

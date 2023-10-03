@@ -3,6 +3,7 @@ extends Node
 
 func _ready():
 	$blueportal.play("open")
+	SoundManager.play_intro_music()
 
 
 func _process(delta):
@@ -13,11 +14,12 @@ func _process(delta):
 
 func _input(event):
 	if event.is_action_pressed("Enter"):
+		SoundManager.stop_intro_music()
 		start_game()
 
 
 func start_game():
-	GameManager.new_game()
+	get_tree().change_scene_to_file(CutsceneManager.intro_scene)
 
 
 func _on_timer_timeout():

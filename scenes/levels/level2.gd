@@ -9,16 +9,17 @@ extends Node
 @onready var enemy_spawner_7 = $HBEnemySpawner/EnemySpawner7
 @onready var enemy_spawner_8 = $HBEnemySpawner/EnemySpawner8
 
-var enemy1green = preload("res://scenes/enemies/enemy1green.tscn")
-var enemy1red = preload("res://scenes/enemies/enemy1red.tscn")
-var enemy2red = preload("res://scenes/enemies/enemy2red.tscn")
+var enemy1 = preload("res://scenes/enemies/enemy1red.tscn")
+var enemy2 = preload("res://scenes/enemies/enemy1green.tscn")
+var enemy3 = preload("res://scenes/enemies/enemy2red.tscn")
+@onready var final_blitz_music = $FinalBlitzMusic
 
 var enemy_2_probability = 35
 var enemy_3_probability = -5
 
-var level_2_1_limit = 15
-var level_2_2_limit = 25
-var level_2_3_limit = 45
+var level_1_limit = 5#15
+var level_2_limit = 10#25
+var level_3_limit = 15#45
 var current_sublevel = 0
 var is_flawless_victory = false
 
@@ -26,34 +27,43 @@ var is_flawless_victory = false
 func _ready():
 	clean_scene()
 	SignalManager.final_blitz_warning.connect(on_final_blitz_warning)
+	update_ui()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if level_2_3_limit <= GameManager.enemy_killed and current_sublevel == 3:
+	verify_progress()
+	
+	
+func verify_progress():
+	if level_3_limit <= GameManager.enemy_killed and current_sublevel == 3:
+		GameManager.is_final_blitz = true
 		if get_tree().get_nodes_in_group("enemy").size() <= 0:
-			SignalManager.level_finished.emit()
-			if is_flawless_victory:
-				SignalManager.flawless_victory.emit()
-			
-	if level_2_3_limit <= GameManager.enemy_killed and current_sublevel == 2:
-		enemy_spawn_timer.stop()
-		SignalManager.final_blitz_warning.emit()
-		current_sublevel = 3
-				
-	if level_2_2_limit <= GameManager.enemy_killed and current_sublevel == 1:
+			SignalManager.level_finished.emit()		
+			final_blitz_music.stop()
+	if level_3_limit <= GameManager.enemy_killed and current_sublevel == 2:
+		enemy_spawn_timer.stop()	
+		var enemies = get_tree().get_nodes_in_group("enemy")
+		if enemies.size() > 0:
+			for enemy in enemies:
+				if enemy.global_position.y <= -25:				
+					SignalManager.final_blitz_warning.emit()
+					final_blitz_music.play()
+					current_sublevel = 3		
+					break
+		current_sublevel = 3					
+	if level_2_limit <= GameManager.enemy_killed and current_sublevel == 1:
 		GameManager.enemy_spawn_timer_min = 1.0
 		GameManager.enemy_spawn_timer_max = 2.0
 		current_sublevel = 2
-		enemy_2_probability = 70
-		enemy_3_probability = 40
-		
-	if level_2_1_limit <= GameManager.enemy_killed and current_sublevel == 0:
+		enemy_2_probability = 60
+		enemy_3_probability = 30		
+	if level_1_limit <= GameManager.enemy_killed and current_sublevel == 0:
 		GameManager.enemy_spawn_timer_min = 1.5
 		GameManager.enemy_spawn_timer_max = 3.0
 		current_sublevel = 1
 		enemy_2_probability = 30
-		enemy_3_probability = 30
+		enemy_3_probability = 15
 		
 
 func _on_enemy_spawn_timer_timeout():
@@ -65,11 +75,11 @@ func spawn_enemy():
 	var e
 	var rnd = randi_range(0,100)
 	if enemy_3_probability >=rnd:
-		e = enemy2red.instantiate() as Node2D
+		e = enemy3.instantiate() as Node2D
 	elif enemy_2_probability >=rnd:
-		e = enemy1green.instantiate() as Node2D
+		e = enemy2.instantiate() as Node2D
 	else:
-		e = enemy1red.instantiate() as Node2D
+		e = enemy1.instantiate() as Node2D
 	
 	get_tree().root.add_child(e)
 	var i = randi_range(1, 8)
@@ -100,6 +110,14 @@ func clean_scene():
 	for e in enemies:
 		if e.is_in_group("enemy"):
 			e.queue_free()
+			
+			
+func update_ui():
+	SignalManager.speed_update.emit(false)
+	SignalManager.score_updated.emit(0)
+	SignalManager.weapon_speed_update.emit(false)
+	SignalManager.weapon_update.emit(false)
+	SignalManager.combo_update.emit()
 			
 			
 func on_final_blitz_warning():

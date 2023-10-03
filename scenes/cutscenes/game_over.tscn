@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://bj7g2x35tw2fe"]
+
+[ext_resource type="LabelSettings" uid="uid://cg0lg5n2v7sdw" path="res://label.tres" id="1_fj6ww"]
+[ext_resource type="Script" path="res://scenes/cutscenes/game_over.gd" id="2_6db16"]
+[ext_resource type="Texture2D" uid="uid://dnshcc0ylsfnn" path="res://assets/PNG/Portraits/the_interceptor.png" id="3_ikgj4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7v2fu"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.882813, 0.0390625, 0.117188, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="Animation" id="Animation_sjc7h"]
+resource_name = "cutscene"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 2.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.25, 0.75, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8gmsv"]
+_data = {
+"cutscene": SubResource("Animation_sjc7h")
+}
+
+[node name="TextGameOver" type="Label"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -360.0
+offset_top = -900.0
+offset_right = 190.0
+offset_bottom = -741.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_7v2fu")
+text = "   
+                                  THE INTERCEPTOR :
+                                  Fugitive captured... Mission accomplished... 
+                                  Returning to base..."
+label_settings = ExtResource("1_fj6ww")
+visible_characters = 0
+visible_characters_behavior = 2
+visible_ratio = 0.0
+script = ExtResource("2_6db16")
+
+[node name="MageLady" type="Sprite2D" parent="."]
+position = Vector2(77, 80.0001)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_ikgj4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "cutscene"
+libraries = {
+"": SubResource("AnimationLibrary_8gmsv")
+}

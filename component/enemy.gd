@@ -5,7 +5,8 @@ var is_dying = false
 var is_hidden = false
 var is_dead = false
 
-@export var laser = PackedScene
+@export var laser_scene = PackedScene
+@export var deathParticles_scene = PackedScene
 @export var hp: int
 @export var points: int
 @export var direction_x: int
@@ -13,7 +14,6 @@ var is_dead = false
 @onready var sprite_2d = $Sprite2D
 @onready var timer = $Timer
 @onready var collision_shape_2d_2 = $Area2D/CollisionShape2D2
-@onready var audio_stream_player = $AudioStreamPlayer
 
 
 var speed = EnemyManager.speed
@@ -26,19 +26,6 @@ func _ready():
 func _physics_process(delta):	
 	velocity = move(global_position)
 	move_and_slide()
-
-func _process(delta):	
-	if sprite_2d.get_animation() == "death":
-		if sprite_2d.is_playing():
-			if !is_dying:
-				update_interface()
-				is_dying = true
-		else:
-			is_dead = true
-	if is_dying:
-		collision_shape_2d_2.set_deferred("disabled", true)
-	if is_dead:
-		queue_free()
 			
 			
 func move(gp: Vector2):
@@ -58,24 +45,27 @@ func update_interface():
 	
 		
 func final_blitz():
-	if is_in_group("enemy_missed"):
-		speed = EnemyManager.max_speed
-		is_hidden = false
+	speed = EnemyManager.max_speed
+	is_hidden = false
 
 
-func hit(power: float, sprite_2d: AnimatedSprite2D):
+func hit(power: int):
 	if (!is_hidden):
 		if hp > 0:
 			hp -= power
 			if hp <= 0:
 				speed = 0
-				sprite_2d.play("death")
-				play_explosion_sound()
-				sprite_2d.rotation = randi_range(0,360)
+				update_interface()
+				die(deathParticles_scene)
 				
 				
-func play_explosion_sound():
-	audio_stream_player.play()
+func die(deathParticles: PackedScene):
+	var _particle = deathParticles.instantiate()
+	_particle.position = global_position
+	_particle.rotation = global_rotation
+	_particle.emitting = true
+	get_tree().current_scene.add_child(_particle)
+	queue_free()
 				
 				
 func shoot(laser: PackedScene, gp: Vector2):
@@ -100,23 +90,24 @@ func add_enemy_missed_icon():
 	var HBs = get_tree().get_nodes_in_group("enemy_missed_hb")
 	for hb in HBs:
 		var enemy_sprite = sprite_2d.duplicate() as AnimatedSprite2D
+		
 		enemy_sprite.scale = Vector2(0.4,0.4)
 		hb.add_child(enemy_sprite)
 		GameManager.enemy_missed += 1
 		enemy_sprite.position.x = hb.get_child_count() * 25
 	
 	
-func check_if_hit(area: Area2D, sprite_2d: AnimatedSprite2D):
+func check_if_hit(area: Area2D):
 	if hp > 0:
 		if area.is_in_group("weapon"):
 			if (area.is_player_weapon):
-				hit(WeaponManager.weapon_power, sprite_2d)
+				hit(WeaponManager.weapon_power)
 				
 				
-func check_if_player_collision(area: Area2D, sprite_2d: AnimatedSprite2D):
+func check_if_player_collision(area: Area2D):
 	if hp > 0:
 		if area.is_in_group("player"):
-				hit(100.0, sprite_2d)
+				hit(100.0)
 			
 			
 func on_final_blitz():
@@ -124,7 +115,7 @@ func on_final_blitz():
 
 
 func _on_timer_timeout():
-	var l = shoot(laser, global_position)
+	var l = shoot(laser_scene, global_position)
 	if l != null:
 		get_tree().root.add_child(l)
 		l.play()
@@ -135,8 +126,8 @@ func _on_screen_exited():
 
 
 func _on_area_entered(area):
-	check_if_hit(area, sprite_2d)
+	check_if_hit(area)
 				
 
 func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	check_if_player_collision(area, sprite_2d)
+	check_if_player_collision(area)

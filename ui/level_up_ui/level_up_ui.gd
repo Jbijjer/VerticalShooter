@@ -13,8 +13,7 @@ func _process(delta):
 	if timer.is_stopped():
 		if (GameManager.is_leveling_up):
 			if Input.is_action_just_pressed("Left"):
-				if PlayerManager.lives < 3:
-					_on_lifeup_pressed()
+				_on_lifeup_pressed()
 			elif Input.is_action_just_pressed("Down"):
 				_on_speedup_pressed()
 			elif Input.is_action_just_pressed("Right"):
@@ -34,7 +33,7 @@ func on_level_up():
 
 
 func _on_lifeup_pressed():
-	if PlayerManager.lives == 3:
+	if PlayerManager.lives < 3:
 		PlayerManager.lives += 1
 		SignalManager.player_heal.emit()
 		quit_upgrades()
@@ -43,20 +42,20 @@ func _on_lifeup_pressed():
 func _on_weaponspeedup_pressed():
 	if PlayerManager.weapon_speed_level > 0.1:
 		PlayerManager.increase_max_weapon_speed(1)
-		SignalManager.weapon_speed_update.emit()
+		SignalManager.weapon_speed_update.emit(true)
 		quit_upgrades()
 
 
 func _on_speedup_pressed():
 	PlayerManager.increase_max_speed(1)
-	SignalManager.speed_update.emit()
+	SignalManager.speed_update.emit(true)
 	quit_upgrades()
 
 
 func _on_damageup_pressed():
 	if WeaponManager.level <= 4:
 		WeaponManager.increase_weapon_power(1)
-		SignalManager.weapon_update.emit()
+		SignalManager.weapon_update.emit(true)
 		quit_upgrades()
 	
 	

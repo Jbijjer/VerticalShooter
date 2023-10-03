@@ -1,29 +1,41 @@
-[gd_scene load_steps=4 format=3 uid="uid://dnp5omn5i604c"]
+[gd_scene load_steps=5 format=3 uid="uid://dnp5omn5i604c"]
 
 [ext_resource type="Script" path="res://ui/game_over_ui/game_over_ui.gd" id="1_1rxdf"]
-[ext_resource type="FontFile" uid="uid://tel1w5ccqqwi" path="res://assets/font/kenvector_future.ttf" id="1_43mx2"]
+[ext_resource type="FontFile" uid="uid://du7kehjberimj" path="res://assets/font/Vermin Vibes 1989.ttf" id="2_551tr"]
+[ext_resource type="PackedScene" uid="uid://bj7g2x35tw2fe" path="res://scenes/cutscenes/game_over.tscn" id="3_od5uj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_43ygm"]
-font = ExtResource("1_43mx2")
-font_size = 70
+font = ExtResource("2_551tr")
+font_size = 113
 font_color = Color(1, 0.0588235, 0.25098, 1)
 
-[node name="game_over_ui" type="CanvasLayer"]
+[node name="game_over_ui" type="Node"]
 process_mode = 3
 script = ExtResource("1_1rxdf")
 
-[node name="TitleLabel" type="Label" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer"]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
+offset_left = -270.0
+offset_top = -51.5
+offset_right = 270.0
+offset_bottom = 51.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "GAME OVER"
 label_settings = SubResource("LabelSettings_43ygm")
+
+[node name="TextGameOver" parent="CanvasLayer" instance=ExtResource("3_od5uj")]
+visible = false
+offset_left = -272.0
+offset_top = -271.0
+offset_right = 278.0
+offset_bottom = -112.0
+
+[editable path="CanvasLayer/TextGameOver"]

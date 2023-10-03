@@ -32,9 +32,9 @@ func _physics_process(delta):
 func move():
 	if !boss_song.playing:
 		boss_song.play()
-	if global_position.x >= 550:
+	if global_position.x >= 595:
 		direction_x = -1
-	if global_position.x <= 165:
+	if global_position.x <= 120:
 		direction_x = 1
 	if global_position.y <= 235:
 		velocity = Vector2(0, speed)

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsynm8cq6qc38"]
+
+[ext_resource type="Script" path="res://manager/sound_manager.gd" id="1_w8y55"]
+[ext_resource type="AudioStream" uid="uid://cu5oct4md1tc7" path="res://assets/audio/space-chillout-14194.mp3" id="2_5ht43"]
+
+[node name="sound_manager" type="Node"]
+script = ExtResource("1_w8y55")
+
+[node name="IntroMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_5ht43")

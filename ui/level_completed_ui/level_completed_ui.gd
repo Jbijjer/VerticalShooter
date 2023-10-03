@@ -5,6 +5,7 @@ extends CanvasLayer
 func _ready():
 	SignalManager.level_finished.connect(on_level_finished)
 	
+	
 func _process(delta): 
 	if visible == true:
 		if Input.is_action_just_pressed("Enter"):
@@ -14,6 +15,15 @@ func _process(delta):
 				get_tree().change_scene_to_file(LevelManager.level2_scene)
 			elif GameManager.level == 3:
 				get_tree().change_scene_to_file(LevelManager.level3_scene)
+	if GameManager.level == 2:
+		$TextGameOver.text = "   
+								  THE INTERCEPTOR :
+								  Fugitive escaped... Don't loose him... 
+Call for back ups!"
+	if GameManager.level == 3:
+		$TextGameOver.text = "   
+								  THE INTERCEPTOR :
+								  GO AWAY! I'LL TAKE CARE OF HIM!"
 	
 	
 func on_level_finished():
