@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://p5qxspebac7p"]
+[gd_scene load_steps=11 format=3 uid="uid://p5qxspebac7p"]
 
 [ext_resource type="Script" path="res://scenes/levels/level1.gd" id="1_kdktg"]
 [ext_resource type="PackedScene" uid="uid://cu1bmcpku7y8" path="res://ui/level_up_ui/level_up_ui.tscn" id="2_i0dyx"]
@@ -8,26 +8,25 @@
 [ext_resource type="PackedScene" uid="uid://cgxyj8f7wq5dx" path="res://scenes/background/background.tscn" id="6_6istg"]
 [ext_resource type="PackedScene" uid="uid://elqqjnku0tdp" path="res://ui/final_blitz_warning_ui/final_blitz_warning_ui.tscn" id="6_qw4j4"]
 [ext_resource type="PackedScene" uid="uid://ccjevfme2ltui" path="res://scenes/player/player.tscn" id="7_hwtqr"]
-[ext_resource type="PackedScene" uid="uid://v018e0knhuyy" path="res://ui/flawless_victory_ui/flawless_victory_ui.tscn" id="8_sv1c7"]
 [ext_resource type="PackedScene" uid="uid://dvvjn5b0g1bjb" path="res://ui/main_ui.tscn" id="10_binmp"]
 [ext_resource type="AudioStream" uid="uid://dn15ec06aq73c" path="res://assets/audio/FinalBlitzMusic.wav" id="12_urkj5"]
 
 [node name="level1" type="Node" groups=["level"]]
 script = ExtResource("1_kdktg")
 
-[node name="main_ui" parent="." instance=ExtResource("10_binmp")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="level_up_ui" parent="." instance=ExtResource("2_i0dyx")]
+[node name="main_ui" parent="CanvasLayer" instance=ExtResource("10_binmp")]
 
-[node name="pause_ui" parent="." instance=ExtResource("3_meh2l")]
+[node name="level_up_ui" parent="CanvasLayer" instance=ExtResource("2_i0dyx")]
 
-[node name="game_over_ui" parent="." instance=ExtResource("4_tn388")]
+[node name="pause_ui" parent="CanvasLayer" instance=ExtResource("3_meh2l")]
 
-[node name="level_completed_ui" parent="." instance=ExtResource("5_5ky81")]
+[node name="game_over_ui" parent="CanvasLayer" instance=ExtResource("4_tn388")]
 
-[node name="final_blitz_warning_ui" parent="." instance=ExtResource("6_qw4j4")]
+[node name="level_completed_ui" parent="CanvasLayer" instance=ExtResource("5_5ky81")]
 
-[node name="final_blitz_warning_ui2" parent="." instance=ExtResource("8_sv1c7")]
+[node name="final_blitz_warning_ui" parent="CanvasLayer" instance=ExtResource("6_qw4j4")]
 
 [node name="background" parent="." instance=ExtResource("6_6istg")]
 visible = false

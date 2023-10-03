@@ -1,7 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://bgl6gf05xgji5"]
+[gd_scene load_steps=21 format=3 uid="uid://bgl6gf05xgji5"]
 
 [ext_resource type="Script" path="res://component/enemy.gd" id="1_ytllg"]
+[ext_resource type="PackedScene" uid="uid://b1g7maj6o7lrj" path="res://scenes/laser/greenlaser.tscn" id="2_4votk"]
 [ext_resource type="Texture2D" uid="uid://n8ofs2wyub4h" path="res://assets/PNG/Damage/Explosion/48x48 - Explosions-Sheet.png" id="3_2ptsu"]
+[ext_resource type="PackedScene" uid="uid://derk8otrcmlu" path="res://scenes/enemies/redParticles.tscn" id="3_16w2e"]
 [ext_resource type="Texture2D" uid="uid://cj5rd5p8go0bx" path="res://assets/PNG/Enemies/enemyGreen5.png" id="4_leywh"]
 [ext_resource type="AudioStream" uid="uid://dw6igtq272ist" path="res://assets/audio/explosion_enemy1.mp3" id="5_583gj"]
 
@@ -123,11 +125,14 @@ animations = [{
 }]
 
 [node name="enemy1green" type="CharacterBody2D" groups=["enemy"]]
+modulate = Color(0.97, 0.97, 0.97, 1)
 scale = Vector2(1.2, 1.2)
 collision_layer = 2
 collision_mask = 17
 motion_mode = 1
 script = ExtResource("1_ytllg")
+laser_scene = ExtResource("2_4votk")
+deathParticles_scene = ExtResource("3_16w2e")
 hp = 20
 points = 150
 direction_y = 1
@@ -140,6 +145,7 @@ collision_mask = 19
 shape = SubResource("CircleShape2D_ldo44")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.97, 0.97, 0.97, 1)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_rcs6f")
 animation = &"death"

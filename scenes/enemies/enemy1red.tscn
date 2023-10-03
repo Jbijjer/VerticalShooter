@@ -125,6 +125,8 @@ animations = [{
 }]
 
 [node name="enemy1red" type="CharacterBody2D" groups=["enemy"]]
+modulate = Color(0.960784, 0.960784, 0.94902, 1)
+self_modulate = Color(0.960784, 0.960784, 0.960784, 1)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("2_meyp7")
 laser_scene = ExtResource("3_c2lue")

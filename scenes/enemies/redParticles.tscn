@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://derk8otrcmlu"]
+[gd_scene load_steps=12 format=3 uid="uid://derk8otrcmlu"]
 
 [ext_resource type="Script" path="res://scenes/enemies/deathParticles.gd" id="1_fyv0e"]
 [ext_resource type="AudioStream" uid="uid://dw6igtq272ist" path="res://assets/audio/explosion_enemy1.mp3" id="2_u8lmb"]
@@ -52,29 +52,8 @@ turbulence_noise_strength = 5.0
 turbulence_noise_scale = 4.37
 anim_speed_curve = SubResource("CurveTexture_dwqoc")
 
-[sub_resource type="Gradient" id="Gradient_mw1ol"]
-offsets = PackedFloat32Array(0.488889, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_sqiql"]
-gradient = SubResource("Gradient_mw1ol")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hvsp5"]
-lifetime_randomness = 1.0
-emission_shape = 1
-emission_sphere_radius = 1.0
-particle_flag_disable_z = true
-spread = 180.0
-gravity = Vector3(0, 0, 0)
-initial_velocity_max = 389.47
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
-scale_max = 5.0
-color_ramp = SubResource("GradientTexture1D_sqiql")
-turbulence_enabled = true
-
 [node name="redParticles" type="GPUParticles2D"]
-self_modulate = Color(100, 0.04, 0.02, 1)
+modulate = Color(54.44, 0.07, 0.04, 1)
 emitting = false
 amount = 200
 process_material = SubResource("ParticleProcessMaterial_j5nle")
@@ -84,18 +63,6 @@ explosiveness = 1.0
 randomness = 0.25
 fixed_fps = 60
 script = ExtResource("1_fyv0e")
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-modulate = Color(0.815686, 0.552941, 0, 1)
-show_behind_parent = true
-emitting = false
-amount = 100
-process_material = SubResource("ParticleProcessMaterial_hvsp5")
-lifetime = 2.0
-one_shot = true
-explosiveness = 1.0
-randomness = 1.0
-fixed_fps = 60
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_u8lmb")

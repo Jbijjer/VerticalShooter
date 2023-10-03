@@ -115,7 +115,7 @@ func on_final_blitz():
 
 
 func _on_timer_timeout():
-	var l = shoot(laser_scene, global_position)
+	var l = shoot(laser_scene, global_position) 
 	if l != null:
 		get_tree().root.add_child(l)
 		l.play()
