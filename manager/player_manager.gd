@@ -19,14 +19,14 @@ func reset():
 
 
 func increase_max_speed(i: int):
-	speed_level += i
-	max_speed = INIT_MAX_SPEED + (LVL_UP_GROWTH * speed_level)
+       speed_level += i
+       max_speed = INIT_MAX_SPEED + (LVL_UP_GROWTH * (speed_level - 1))
 
 
 func decrease_max_speed(i: int):
-	if speed_level > 1:
-		speed_level -= i
-		max_speed = INIT_MAX_SPEED + (LVL_UP_GROWTH * speed_level)
+       if speed_level > 1:
+               speed_level -= i
+               max_speed = INIT_MAX_SPEED + (LVL_UP_GROWTH * (speed_level - 1))
 
 
 func increase_max_weapon_speed(i: int):
