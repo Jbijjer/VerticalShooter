@@ -14,8 +14,12 @@ var shoot_wait_time: float = 0.25
 
 
 func reset():
-	lives = 3
-	cur_speed = MIN_SPEED
+        lives = 3
+        cur_speed = MIN_SPEED
+        max_speed = INIT_MAX_SPEED
+        speed_level = 1
+        weapon_speed_level = 1
+        shoot_wait_time = 0.25
 
 
 func increase_max_speed(i: int):
