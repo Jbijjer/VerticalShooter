@@ -31,7 +31,8 @@ func on_level_up():
 func reset():
         ScoreManager.score = 0
         ScoreManager.level_up_score_needed = 500
-        ScoreManager.score_needed_growth = 250
+        ScoreManager.score_needed_base = 500
+        ScoreManager.score_needed_growth = 750
 
 func load_high_score():
         if FileAccess.file_exists(SAVE_PATH):
