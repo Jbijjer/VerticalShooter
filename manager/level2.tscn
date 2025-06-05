@@ -1,0 +1,87 @@
+[gd_scene load_steps=11 format=3 uid="uid://73hdqf3ufaa0"]
+
+[ext_resource type="Script" uid="uid://cj3fex2ngbe7p" path="res://scenes/levels/level2.gd" id="1_w5cgh"]
+[ext_resource type="PackedScene" uid="uid://cu1bmcpku7y8" path="res://ui/level_up_ui/level_up_ui.tscn" id="2_ji0x4"]
+[ext_resource type="PackedScene" uid="uid://b3n1p4voju61h" path="res://ui/pause_ui/pause_ui.tscn" id="3_r1ntk"]
+[ext_resource type="PackedScene" uid="uid://dnp5omn5i604c" path="res://ui/game_over_ui/game_over_ui.tscn" id="4_jirw1"]
+[ext_resource type="PackedScene" uid="uid://brrdps6u3goyu" path="res://ui/level_completed_ui/level_completed_ui.tscn" id="5_qbpwb"]
+[ext_resource type="PackedScene" uid="uid://cgxyj8f7wq5dx" path="res://scenes/background/background.tscn" id="6_x6fg5"]
+[ext_resource type="PackedScene" uid="uid://elqqjnku0tdp" path="res://ui/final_blitz_warning_ui/final_blitz_warning_ui.tscn" id="7_87ajm"]
+[ext_resource type="PackedScene" uid="uid://ccjevfme2ltui" path="res://scenes/player/player.tscn" id="7_k6owd"]
+[ext_resource type="PackedScene" uid="uid://dvvjn5b0g1bjb" path="res://ui/main_ui.tscn" id="9_8rgci"]
+[ext_resource type="AudioStream" uid="uid://dn15ec06aq73c" path="res://assets/audio/FinalBlitzMusic.wav" id="10_mcu7h"]
+
+[node name="level2" type="Node"]
+script = ExtResource("1_w5cgh")
+
+[node name="main_ui" parent="." instance=ExtResource("9_8rgci")]
+
+[node name="level_up_ui" parent="." instance=ExtResource("2_ji0x4")]
+
+[node name="pause_ui" parent="." instance=ExtResource("3_r1ntk")]
+
+[node name="game_over_ui" parent="." instance=ExtResource("4_jirw1")]
+
+[node name="level_completed_ui" parent="." instance=ExtResource("5_qbpwb")]
+
+[node name="final_blitz_warning_ui" parent="." instance=ExtResource("7_87ajm")]
+
+[node name="background" parent="." instance=ExtResource("6_x6fg5")]
+position = Vector2(-5, -13)
+
+[node name="player" parent="." instance=ExtResource("7_k6owd")]
+position = Vector2(350, 800)
+
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(360, 450)
+script = "res://scenes/levels/Camera2D.gd"
+
+[node name="HBEnemySpawner" type="HBoxContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -41.0
+grow_horizontal = 2
+
+[node name="EnemySpawner1" type="Marker2D" parent="HBEnemySpawner"]
+position = Vector2(80, 0)
+
+[node name="EnemySpawner2" type="Marker2D" parent="HBEnemySpawner"]
+position = Vector2(160, 0)
+
+[node name="EnemySpawner3" type="Marker2D" parent="HBEnemySpawner"]
+position = Vector2(240, 0)
+
+[node name="EnemySpawner4" type="Marker2D" parent="HBEnemySpawner"]
+position = Vector2(320, 0)
+
+[node name="EnemySpawner5" type="Marker2D" parent="HBEnemySpawner"]
+position = Vector2(400, 0)
+
+[node name="EnemySpawner6" type="Marker2D" parent="HBEnemySpawner"]
+position = Vector2(480, 0)
+
+[node name="EnemySpawner7" type="Marker2D" parent="HBEnemySpawner"]
+position = Vector2(560, 0)
+
+[node name="EnemySpawner8" type="Marker2D" parent="HBEnemySpawner"]
+position = Vector2(640, 0)
+
+[node name="HBEnemies" type="HBoxContainer" parent="." groups=["enemy_missed_hb"]]
+offset_left = 1.0
+offset_top = 841.0
+offset_right = 720.0
+offset_bottom = 899.0
+
+[node name="FinalBlitzWarningTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="FinalBlitzMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_mcu7h")
+
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
+[connection signal="timeout" from="FinalBlitzWarningTimer" to="." method="_on_final_blitz_warning_timer_timeout"]
