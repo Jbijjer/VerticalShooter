@@ -132,7 +132,7 @@ func on_final_blitz_warning():
 
 
 func _on_final_blitz_warning_timer_timeout():
-	var enemies_missed = $HBEnemies.get_children()
-	for enemy in enemies_missed:
-		enemy.queue_free()
-	SignalManager.start_final_blitz.emit() # Replace with function body.
+        var enemies_missed = $HBEnemies.get_children()
+        for enemy in enemies_missed:
+                enemy.queue_free()
+        SignalManager.start_final_blitz.emit()
