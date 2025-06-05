@@ -5,7 +5,8 @@ var weapon_power = level * 5.0
 
 
 func reset():
-	level = 1
+        level = 1
+        weapon_power = level * 5.0
 	
 	
 func increase_weapon_power(i: int):
