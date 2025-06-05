@@ -38,4 +38,20 @@ offset_top = -271.0
 offset_right = 278.0
 offset_bottom = -112.0
 
+[node name="HighScoreLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -270.0
+offset_top = 75.0
+offset_right = 270.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "HIGH SCORE : 0"
+label_settings = SubResource("LabelSettings_43ygm")
+
 [editable path="CanvasLayer/TextGameOver"]

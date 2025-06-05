@@ -37,6 +37,7 @@ wait_time = 2.0
 autostart = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
+script = "res://scenes/levels/Camera2D.gd"
 position = Vector2(360, 450)
 
 [node name="HBEnemySpawner" type="HBoxContainer" parent="."]

@@ -132,10 +132,10 @@ func on_final_blitz_warning():
 		
 
 func _on_final_blitz_warning_timer_timeout():
-	var enemies_missed = $HBEnemies.get_children()
-	for enemy in enemies_missed:
-		enemy.queue_free()
-	SignalManager.start_final_blitz.emit() # Replace with function body.
+        var enemies_missed = $HBEnemies.get_children()
+        for enemy in enemies_missed:
+                enemy.queue_free()
+        SignalManager.start_final_blitz.emit()
 
 
 func move_boss():
@@ -143,10 +143,7 @@ func move_boss():
 	
 	
 func shake(shake_amount : float):
-	$Camera2D.set_offset(Vector2( \
-		randf_range(-1.0, 1.0) * shake_amount, \
-		randf_range(-1.0, 1.0) * shake_amount \
-	))
+        $Camera2D.add_shake(shake_amount)
 
 
 func _on_screen_shake_timer_timeout():
