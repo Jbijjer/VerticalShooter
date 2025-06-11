@@ -23,18 +23,18 @@ func _ready():
 	SignalManager.start_final_blitz.connect(on_final_blitz)
 
 
-func _physics_process(delta):	
-	velocity = move(global_position)
-	move_and_slide()
+func _physics_process(delta):
+        velocity = move(global_position, delta)
+        move_and_slide()
 			
 			
-func move(gp: Vector2):
+func move(gp: Vector2, delta):
 	if (!is_hidden):
 		if gp.x >= 700:
 			direction_x = -1
 		if gp.x <= 10:
 			direction_x = 1
-		return Vector2(speed * direction_x, speed * direction_y)
+                return Vector2(speed * direction_x, speed * direction_y) * delta
 	return Vector2.ZERO
 			
 
