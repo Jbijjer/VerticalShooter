@@ -30,7 +30,7 @@ func _process(delta):
 
 
 func _physics_process(delta):
-	global_position.y += speed * direction
+        global_position.y += speed * direction * delta
 
 
 func shoot(gp: Vector2, is_player: bool):

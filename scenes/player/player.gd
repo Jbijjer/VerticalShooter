@@ -27,17 +27,17 @@ func shoot():
 	
 	
 func _physics_process(delta):
-	if PlayerManager.lives <= 0:
-		return
-	get_input()
-	move_and_slide()
+        if PlayerManager.lives <= 0:
+                return
+        get_input(delta)
+        move_and_slide()
 	
 	
-func get_input():	
+func get_input(delta):
 	if not is_animation_playing:
 		if Input.is_action_just_pressed("Shoot"):
 			shoot()
-		check_cur_speed()
+                check_cur_speed(delta)
 		if Input.is_action_pressed("Right"):
 			velocity = Vector2(PlayerManager.cur_speed, 0)
 		elif Input.is_action_pressed("Left"):
@@ -48,11 +48,12 @@ func get_input():
 		is_out_of_bound()
 	
 	
-func check_cur_speed():
-	if (PlayerManager.cur_speed + PlayerManager.ACCELERATION_RATE <= PlayerManager.max_speed):
-		PlayerManager.cur_speed += PlayerManager.ACCELERATION_RATE
-	else:
-		PlayerManager.cur_speed = PlayerManager.max_speed
+func check_cur_speed(delta):
+        var increment = PlayerManager.ACCELERATION_RATE * delta
+        if (PlayerManager.cur_speed + increment <= PlayerManager.max_speed):
+                PlayerManager.cur_speed += increment
+        else:
+                PlayerManager.cur_speed = PlayerManager.max_speed
 		
 		
 func reset_cur_speed():

@@ -7,7 +7,7 @@ var direction = 1
 var is_player_weapon = false
 
 func _physics_process(delta):
-	global_position.y += SPEED * direction
+        global_position.y += SPEED * direction * delta
 
 
 func _on_screen_exited():
